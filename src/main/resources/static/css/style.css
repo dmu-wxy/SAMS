@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+.pro{
+	height: 8px;
+	background-color: #4C4C4C;
+	width: 500px;
+	cursor: pointer;
+	
+}
+
+.playball{
+	height: 8px;
+	width: 8px;
+	background-color: orange;
+	position: relative;
+	
+}
+
+.time{
+	width: 500px;
+	height: 20px;
+	border: 1px solid black;
+}

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+body {font-family: Arial, Helvetica, sans-serif; font-size:12px; text-align:center;}
+a { text-decoration: none;}
+#all {widht: 100%; text-align:center; margin:auto;}
+#main {width: 96%; line-height: 1.8; margin:auto; border:1px #ccc dashed; text-align: left; text-indent: 2em;}
+.mytable {width: 96%;border: 1px solid #bbbbbb;border-collapse: collapse}
+td {border: 1px solid #bbbbbb;border-collapse: collapse;}
+</style>
+</head>
+
+<body>
+<a th:href="@{/toSave}">插入数据</a>
+<div id="all">
+	<table class="mytable">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>名字</td>
+                <td>品种</td>
+                <td>位置</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="animal : ${animals}">
+            <td th:text="${animal.aid}">id</td>
+            <td th:text="${animal.aname}">名字</td>
+            <td th:text="${animal.breed}">品种</td>
+            <td th:text="${animal.p_addr}">位置</td>
+            <td th:text="${animal.gender == 1 ? '公' : '母'}">性别</td>
+            <td th:text="${#dates.format(animal.birth,'yyyy-MM-dd')}">生日</td>
+            <td>
+                <a th:href="@{/findById(aid=${animal.aid})}">修改</a>
+                <a th:href="@{/delete(aid=${animal.aid})}">删除</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

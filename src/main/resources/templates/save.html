@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+body {font-family: Arial, Helvetica, sans-serif; font-size:12px; text-align:center;}
+a { text-decoration: none;}
+#all {widht: 100%; text-align:center; margin:auto;}
+#main {width: 96%; line-height: 1.8; margin:auto; border:1px #ccc dashed; text-align: left; text-indent: 2em;}
+.mytable {width: 96%;border: 1px solid #bbbbbb;border-collapse: collapse}
+td {border: 1px solid #bbbbbb;border-collapse: collapse;}
+</style>
+</head>
+
+<body>
+<div id="all">
+    <form th:action="@{/insert}" method="post">
+	<table class="mytable">
+        <tr>
+            <td>名字：</td>
+            <td><input name="aname"/></td>
+            <td>品种：</td>
+            <td><input name="breed"/></td>
+            <td>位置：</td>
+            <td><input name="p_addr"/></td>
+            <td>性别：</td>
+            <td>
+                <select name="gender">
+                    <option>--请选择--</option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </td>
+            <td>年龄：</td>
+            <td><input name="birth"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="提交"/></td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
+</html>
