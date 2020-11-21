@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Mapper
 public interface AnimalMapper {
 
     @Select("select * from animal")

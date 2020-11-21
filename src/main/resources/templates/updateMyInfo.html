@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>updateMyInfo</title>
+    <style>
+        table {width: 96%;border: 1px solid #bbbbbb;border-collapse: collapse}
+        td {border: 1px solid #bbbbbb;border-collapse: collapse;}
+        th {border: 1px solid #bbbbbb;border-collapse: collapse;}
+    </style>
+</head>
+<body>
+<form th:action="@{/updateInfo}" method="get">
+    <table class="mytable">
+        <tr>
+            <th><input type="hidden" th:value="${manager.mid}" name="mid"/>用户名</th>
+            <td><input th:value="${manager.mname}" name="mname"/></td>
+        </tr>
+        <tr>
+            <th>密码</th>
+            <td><input th:value="${manager.password}" name="password"></td>
+        </tr>
+        <tr>
+            <th>性别</th>
+            <td>
+                <select name="gender">
+                    <option value="1" th:selected="${manager.gender == 1}">男</option>
+                    <option value="2" th:selected="${manager.gender == 2}">女</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>手机</th>
+            <td><input name="mphone" th:value="${manager.mphone}"></td>
+        </tr>
+        <tr>
+            <th>邮箱</th>
+            <td><input name="memail" th:value="${manager.memail}"></td>
+        </tr>
+        <tr>
+            <th>生日</th>
+            <td><input name="birth" th:value="${manager.birth}"></td>
+        </tr>
+        <tr>
+            <th>职责</th>
+            <td><input type="text" name="duty" th:value="${manager.duty}"></td>
+        </tr>
+        <tr>
+            <input type="submit" value="修改"/>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

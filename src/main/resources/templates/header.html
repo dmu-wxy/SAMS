@@ -24,8 +24,8 @@ $(document).ready(function() {
 	<div id="banner"><h1>流浪动物管理系统--后台</h1></div>
     <div id="nav">
     	<ul>
-            <li class="inactive" id="school"><a href="menu.html" target="menu">我的信息</a></li>
-            <li class="active" id="config"><a href="menu.html" target="menu">控制台</a></li>
+            <li class="inactive" id="school"><a th:href="@{/myInfo}" target="main">我的信息</a></li>
+            <li class="active" id="config"><a th:href="@{/main}" target="main">控制台</a></li>
         </ul>
     </div>
     <div id="main">

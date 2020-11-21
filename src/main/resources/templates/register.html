@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>登录</title>
+<title>注册</title>
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -17,16 +17,15 @@
 		 <div id="center">
 		      <div id="center_left"></div>
 			  <div id="center_middle">
-				  <form th:action="@{/loginAccount}" method="post">
+				  <form th:action="@{/registAccout}" method="post">
 					   <div id="user">账 号
 						 <input type="text" name="account" />
 					   </div>
 					   <div id="password">密   码
 						 <input type="password" name="password" />
 					   </div>
-					   <input value="登录" type="submit"/>
-				  </form><br>
-				  <a th:href="@{/register}">注册</a>
+					   <input value="注册" type="submit"/>
+				  </form>
 			  </div>
 			  <div id="center_right"></div>		 
 		 </div>
