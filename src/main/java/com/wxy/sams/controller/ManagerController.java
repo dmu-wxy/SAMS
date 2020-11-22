@@ -16,52 +16,124 @@ public class ManagerController {
 
     private Manager manager;
 
+    @RequestMapping("/")
+    public String interceptor(Model model){
+        String toUrl = "index";
+        System.out.println("使用controller进入页面");
+        if(manager != null){
+            //todo: 如果存在cookie,直接进入主页
+        }else{
+            toUrl = "login";
+            model.addAttribute("msg","");
+        }
+        return toUrl;
+    }
+
     @RequestMapping("/loginAccount")
     public String login(String account, String password, Model model){
-        //todo: 先判断是邮箱还是电话
-        Manager manager = managerService.findByPhone(account);
+        Manager manager = null;
+        if(account != null) {
+            if (account.indexOf("@") < 0) {
+                //电话
+                manager = managerService.findByPhone(account);
+            } else {
+                //邮箱
+                manager = managerService.findByEmail(account);
+            }
+        }
         if(manager == null){
             model.addAttribute("msg","账号不存在");
-            return "redirect:login";
+            System.out.println("账号(" + account + ")不存在");
+            return "login";
         }else{
             System.out.println(password + "--" + manager.getPassword());
             if(!password.equals(manager.getPassword())){
                 model.addAttribute("msg","密码错误");
-                return "redirect:login";
+                System.out.println("密码(" + account + ")错误");
+                return "login";
             }else{
                 model.addAttribute("manager",manager);
+                System.out.println("账号(" + account + ")登录成功");
                 this.manager = manager;
+                //todo: 存cookie
                 return "index";
             }
         }
     }
     @RequestMapping("/registAccout")
-    public String regist(String account,String password){
-        //todo: 判断手机号还是邮箱，查看是否注册过
+    public String regist(Model model,String account,String password){
         Manager manager = new Manager();
-        manager.setMphone(account);
-        manager.setPassword(password);
-        managerService.insert(manager);
-        this.manager = manager;
+        this.manager = new Manager();
+        if(account != null){
+            if(account.indexOf("@") < 0){ //手机
+                if (managerService.isExistsByPhone(account)){
+                    model.addAttribute("msg","该手机号已经注册过");
+                    return "register";
+                }
+                manager.setMphone(account);
+                manager.setPassword(password);
+                managerService.insert(manager);
+                this.manager = managerService.findByPhone(account);
+            }else {  //邮箱
+                if(managerService.isExistsByEmail(account)){
+                    model.addAttribute("msg","该邮箱已经注册过");
+                    return "register";
+                }
+                manager.setMemail(account);
+                manager.setPassword(password);
+                managerService.insert(manager);
+                this.manager = managerService.findByEmail(account);
+            }
+        }
         return "index";
     }
+
+    /**
+     * 我的信息  页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/myInfo")
     public String myInfo(Model model){
         model.addAttribute("manager",manager);
         return "myInfo";
     }
 
+    /**
+     * 更新 我的信息 页面
+     * @param model
+     * @param manager
+     * @return
+     */
     @RequestMapping("/updateInfo")
     public String updateMyInfo(Model model,Manager manager){
-        managerService.update(manager);
-        this.manager = manager;
-        model.addAttribute("manager",manager);
-        return "myInfo";
+        if(managerService.isExistsByPhone(manager.getMphone())){
+            model.addAttribute("msg1","该手机号已经被其他账号注册");
+            return "updateMyInfo";
+        }else if(managerService.isExistsByEmail(manager.getMemail())){
+            model.addAttribute("msg2","该邮箱已经被其他账号注册");
+            return "updateMyInfo";
+        }else {
+            managerService.update(manager);
+            this.manager = manager;
+            model.addAttribute("manager", manager);
+            return "myInfo";
+        }
     }
+
+    /**
+     * 从 我的页面 跳转到  更新我的信息  页面
+     * @param mid
+     * @param model
+     * @return
+     */
     @RequestMapping("/toUpdateMyInfo")
     public String toUpdateMyInfo(String mid,Model model){
         this.manager = managerService.findById(mid);
+        System.out.println(manager);
         model.addAttribute("manager",manager);
+        model.addAttribute("msg1","");
+        model.addAttribute("msg2","");
         return "updateMyInfo";
     }
 }

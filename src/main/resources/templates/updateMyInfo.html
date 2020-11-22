@@ -31,11 +31,17 @@
         </tr>
         <tr>
             <th>手机</th>
-            <td><input name="mphone" th:value="${manager.mphone}"></td>
+            <td>
+                <input name="mphone" th:value="${manager.mphone}">
+                <span th:text="${msg1}" style="color: darkred"></span>
+            </td>
         </tr>
         <tr>
             <th>邮箱</th>
-            <td><input name="memail" th:value="${manager.memail}"></td>
+            <td>
+                <input name="memail" th:value="${manager.memail}">
+                <span th:text="${msg2}" style="color: darkred"></span>
+            </td>
         </tr>
         <tr>
             <th>生日</th>

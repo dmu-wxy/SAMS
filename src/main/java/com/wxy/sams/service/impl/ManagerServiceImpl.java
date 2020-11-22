@@ -42,4 +42,14 @@ public class ManagerServiceImpl implements ManagerService {
         return managerMapper.findById(mid);
     }
 
+    @Override
+    public boolean isExistsByPhone(String mphone) {
+        return managerMapper.isExistsByPhone(mphone) == 0 ? false : true;
+    }
+
+    @Override
+    public boolean isExistsByEmail(String memail) {
+        return managerMapper.isExistsByEmail(memail) == 0 ? false : true;
+    }
+
 }

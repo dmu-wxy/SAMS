@@ -19,4 +19,8 @@ public interface ManagerService {
     public Manager findByEmail(String memail);
 
     public Manager findById(String mid);
+
+    public boolean isExistsByPhone(String mphone);
+
+    public boolean isExistsByEmail(String memail);
 }
