@@ -6,7 +6,11 @@ import com.wxy.sams.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class ManagerController {
@@ -17,20 +21,18 @@ public class ManagerController {
     private Manager manager;
 
     @RequestMapping("/")
-    public String interceptor(Model model){
+    public String interceptor(Model model, @CookieValue(value = "mid",required = false)String mid){
         String toUrl = "index";
-        System.out.println("使用controller进入页面");
-        if(manager != null){
-            //todo: 如果存在cookie,直接进入主页
-        }else{
+        if(mid == null){
             toUrl = "login";
             model.addAttribute("msg","");
         }
+        System.out.println(toUrl);
         return toUrl;
     }
 
     @RequestMapping("/loginAccount")
-    public String login(String account, String password, Model model){
+    public String login(String account, String password, Model model, HttpServletResponse response){
         Manager manager = null;
         if(account != null) {
             if (account.indexOf("@") < 0) {
@@ -55,13 +57,15 @@ public class ManagerController {
                 model.addAttribute("manager",manager);
                 System.out.println("账号(" + account + ")登录成功");
                 this.manager = manager;
-                //todo: 存cookie
+                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
+                cookie.setMaxAge(30);
+                response.addCookie(cookie);
                 return "index";
             }
         }
     }
     @RequestMapping("/registAccout")
-    public String regist(Model model,String account,String password){
+    public String regist(Model model,String account,String password, HttpServletResponse response){
         Manager manager = new Manager();
         this.manager = new Manager();
         if(account != null){
@@ -74,6 +78,9 @@ public class ManagerController {
                 manager.setPassword(password);
                 managerService.insert(manager);
                 this.manager = managerService.findByPhone(account);
+                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
+                cookie.setMaxAge(30);
+                response.addCookie(cookie);
             }else {  //邮箱
                 if(managerService.isExistsByEmail(account)){
                     model.addAttribute("msg","该邮箱已经注册过");
@@ -83,6 +90,9 @@ public class ManagerController {
                 manager.setPassword(password);
                 managerService.insert(manager);
                 this.manager = managerService.findByEmail(account);
+                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
+                cookie.setMaxAge(30);
+                response.addCookie(cookie);
             }
         }
         return "index";
@@ -130,7 +140,6 @@ public class ManagerController {
     @RequestMapping("/toUpdateMyInfo")
     public String toUpdateMyInfo(String mid,Model model){
         this.manager = managerService.findById(mid);
-        System.out.println(manager);
         model.addAttribute("manager",manager);
         model.addAttribute("msg1","");
         model.addAttribute("msg2","");
