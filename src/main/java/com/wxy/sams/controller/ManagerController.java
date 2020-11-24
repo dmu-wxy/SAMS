@@ -1,7 +1,6 @@
 package com.wxy.sams.controller;
 
 import com.wxy.sams.model.Manager;
-import com.wxy.sams.service.ManagerService;
 import com.wxy.sams.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,29 +32,16 @@ public class ManagerController {
 
     @RequestMapping("/loginAccount")
     public String login(String account, String password, Model model, HttpServletResponse response){
-        Manager manager = null;
-        if(account != null) {
-            if (account.indexOf("@") < 0) {
-                //电话
-                manager = managerService.findByPhone(account);
-            } else {
-                //邮箱
-                manager = managerService.findByEmail(account);
-            }
-        }
+        Manager manager = managerService.findManager(account);
         if(manager == null){
             model.addAttribute("msg","账号不存在");
-            System.out.println("账号(" + account + ")不存在");
             return "login";
         }else{
-            System.out.println(password + "--" + manager.getPassword());
             if(!password.equals(manager.getPassword())){
                 model.addAttribute("msg","密码错误");
-                System.out.println("密码(" + account + ")错误");
                 return "login";
             }else{
                 model.addAttribute("manager",manager);
-                System.out.println("账号(" + account + ")登录成功");
                 this.manager = manager;
                 Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
                 cookie.setMaxAge(30);
@@ -66,35 +52,15 @@ public class ManagerController {
     }
     @RequestMapping("/registAccout")
     public String regist(Model model,String account,String password, HttpServletResponse response){
-        Manager manager = new Manager();
         this.manager = new Manager();
-        if(account != null){
-            if(account.indexOf("@") < 0){ //手机
-                if (managerService.isExistsByPhone(account)){
-                    model.addAttribute("msg","该手机号已经注册过");
-                    return "register";
-                }
-                manager.setMphone(account);
-                manager.setPassword(password);
-                managerService.insert(manager);
-                this.manager = managerService.findByPhone(account);
-                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
-                cookie.setMaxAge(30);
-                response.addCookie(cookie);
-            }else {  //邮箱
-                if(managerService.isExistsByEmail(account)){
-                    model.addAttribute("msg","该邮箱已经注册过");
-                    return "register";
-                }
-                manager.setMemail(account);
-                manager.setPassword(password);
-                managerService.insert(manager);
-                this.manager = managerService.findByEmail(account);
-                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
-                cookie.setMaxAge(30);
-                response.addCookie(cookie);
-            }
+        if(managerService.isExists(account)){
+            model.addAttribute("msg","该账号已经被注册过");
+            return "register";
         }
+        this.manager = managerService.insertManager(account,password);
+        Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
+        cookie.setMaxAge(30);
+        response.addCookie(cookie);
         return "index";
     }
 

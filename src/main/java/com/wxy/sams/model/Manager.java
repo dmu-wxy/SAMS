@@ -22,4 +22,5 @@ public class Manager {
     private int gender;
 
     private Date birth;
+
 }

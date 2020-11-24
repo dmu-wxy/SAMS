@@ -52,4 +52,33 @@ public class ManagerServiceImpl implements ManagerService {
         return managerMapper.isExistsByEmail(memail) == 0 ? false : true;
     }
 
+    //todo: 判断了太多次是邮箱还是电话
+    public boolean isExists(String account){
+        if(account.indexOf("@") < 0)
+            return isExistsByPhone(account);
+        else
+            return isExistsByEmail(account);
+    }
+
+    public Manager findManager(String account){
+        if (account.indexOf("@") < 0) {
+            //电话
+            return findByPhone(account);
+        } else {
+            //邮箱
+            return findByEmail(account);
+        }
+    }
+
+    public Manager insertManager(String account,String password){
+        Manager manager = new Manager();
+        if(account.indexOf("@") < 0){
+            manager.setMphone(account);
+        }else{
+            manager.setMemail(account);
+        }
+        manager.setPassword(password);
+        insert(manager);
+        return findManager(account);
+    }
 }
