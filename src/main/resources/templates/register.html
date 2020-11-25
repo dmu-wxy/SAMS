@@ -7,16 +7,14 @@
 </head>
 <body>
 
-    <div id="login">
-	
-	     <div id="top">
-		      <div id="top_left"><img th:src="@{/images/login_03.gif}" /></div>
-			  <div id="top_center"></div>
-		 </div>
-		 
-		 <div id="center">
-		      <div id="center_left"></div>
-			  <div id="center_middle">
+	<div class="header">
+		<img th:src="@{/images/login/headerImg.png}" height="62px"/>
+	</div>
+	 <div id="center">
+		 <div>
+			 <img th:src="@{images/login/contentImg.jpg}" height="282px" width="500px"/>
+			 <div id="center_middle">
+				  注册方式
 				  <form th:action="@{/registAccout}" method="post">
 					   <div id="user">账 号
 						 <input type="text" name="account" />
@@ -24,22 +22,14 @@
 					   <div id="password">密   码
 						 <input type="password" name="password" />
 					   </div>
-					  	<span th:text="${msg}" style="color: darkred">lalala</span><br>
+						<span th:text="${msg}" style="color: darkred">lalala</span><br>
 					   <input value="注册" type="submit"/>
 				  </form>
-			  </div>
-			  <div id="center_right"></div>		 
+			 </div>
 		 </div>
-		 <div id="down">
-		      <div id="down_left">
-			      <div id="inf">
-                       <span class="inf_text">版本信息</span>
-					   <span class="copyright">流浪动物管理系统 v0.1</span>
-			      </div>
-			  </div>
-			  <div id="down_center"></div>		 
-		 </div>
-
-	</div>
+	 </div>
+	 <div id="down">
+		   版本信息：流浪动物管理系统 v0.1
+	 </div>
 </body>
 </html>
