@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <th>生日</th>
-        <td th:text="${manager.birth}">1970.1.1</td>
+        <td th:text="${#dates.format(manager.birth,'yyyy-MM-dd')}">1970.1.1</td>
     </tr>
     <tr>
         <th>职责</th>

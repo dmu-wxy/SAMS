@@ -3,19 +3,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
-<style type="text/css">
-body {font-family: Arial, Helvetica, sans-serif; font-size:12px; text-align:center;}
-a { text-decoration: none;}
-#all {widht: 100%; text-align:center; margin:auto;}
-#main {width: 96%; line-height: 1.8; margin:auto; border:1px #ccc dashed; text-align: left; text-indent: 2em;}
-.mytable {width: 96%;border: 1px solid #bbbbbb;border-collapse: collapse}
-td {border: 1px solid #bbbbbb;border-collapse: collapse;}
-th {border: 1px solid #bbbbbb;border-collapse: collapse;}
-</style>
+    <style type="text/css">
+        body {font-family: Arial, Helvetica, sans-serif; font-size:12px; text-align:center;}
+        a { text-decoration: none;}
+        #all {widht: 100%; text-align:center; margin:auto;}
+        #main {width: 96%; line-height: 1.8; margin:auto; border:1px #ccc dashed; text-align: left; text-indent: 2em;}
+        .mytable {width: 96%;border: 1px solid #bbbbbb;border-collapse: collapse}
+        td {border: 1px solid #bbbbbb;border-collapse: collapse;}
+        th {border: 1px solid #bbbbbb;border-collapse: collapse;}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+        function uploadFile() {
+           var file = $("#multipartFile")[0].files[0];
+           var formData = new FormData();
+           formData.append("multipartFile",file);
+           $.ajax({
+               type:'post',
+               url:'/upload',
+               processData:false,//上传的数据处理成对象
+               contentType:false,//设置请求头，避免用jquery设置请求头，可能会破坏分隔符
+               data:formData,
+               success:function (msg){
+                   $("#result").html(msg);
+               }
+           })
+        }
+    </script>
 </head>
-
 <body>
 <a th:href="@{/toSave}">插入数据</a>
+<div>
+    <input type="file" id="multipartFile"/>
+    <input type="button" value="提交" onclick="uploadFile()"/>
+</div>
+<div id="result"></div>
+<!--<form action="/upload" method="post" enctype="multipart/form-data">-->
+<!--    <input type="file" name="multipartFile"/>-->
+<!--    <input type="submit" name="提交"/>-->
+<!--</form>-->
 <div id="all">
 	<table class="mytable">
         <thead>

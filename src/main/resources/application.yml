@@ -10,6 +10,7 @@ spring:
   mvc:
     format:
       date: yyyy-MM-dd
+    throw-exception-if-no-handler-found: true
   datasource:
     username: root
     password: 123456
@@ -31,3 +32,9 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  servlet:
+    multipart:
+      max-file-size: 1MB
+  resources:
+    add-mappings: false
+
