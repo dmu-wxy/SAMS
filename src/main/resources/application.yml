@@ -2,15 +2,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: false
 
-
-
 spring:
   resource:
     static-path-pattern: classpath:static/
   mvc:
     format:
       date: yyyy-MM-dd
-    throw-exception-if-no-handler-found: true
   datasource:
     username: root
     password: 123456
@@ -35,6 +32,4 @@ spring:
   servlet:
     multipart:
       max-file-size: 1MB
-  resources:
-    add-mappings: false
 

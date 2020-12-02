@@ -19,12 +19,6 @@ import java.io.PrintWriter;
 @ControllerAdvice
 public class MyCustomException {
 
-    @ExceptionHandler(NotFoundException.class)
-    public ModelAndView notFoundException(NotFoundException e){
-        ModelAndView modelAndView = new ModelAndView("/notFound");
-        return modelAndView;
-    }
-
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public void maxUploadSizeExceededException(MaxUploadSizeExceededException e, HttpServletResponse response){
         response.setContentType("text/html;charset=utf-8");
