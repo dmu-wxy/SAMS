@@ -3,7 +3,12 @@ body{margin:0; padding:0; font-size:12px;}
 
 #center{background:url("../images/login/cat.jpg") no-repeat; background-position: 38% center;  width: 100%;position: absolute;top: 62px;bottom:36px;left: 0px;padding-top: 75px;display: flex;
     justify-content: space-between; }
-#center_middle{width:334px; height:387px;text-align: center;border: 1px solid #a0b1c4;background-color: #fff;
+#center_middle{
+    width:334px;
+    height:387px;
+    text-align: center;
+    border: 1px solid #a0b1c4;
+    background-color: #fff;
     position: relative;
     right: 15%;
     z-index: 100 !important;

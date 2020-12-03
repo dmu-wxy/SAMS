@@ -1,9 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>登录</title>
-<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>登录</title>
+	<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" th:href="@{/global/css/layui.css}">
+	<script th:src="@{/global/layui.js}"></script>
+	<script>
+		//Demo
+		layui.use('form', function(){
+			var form = layui.form;
+
+			//监听提交
+			form.on('submit(formDemo)', function(data){
+				layer.msg(JSON.stringify(data.field));
+				return false;
+			});
+		});
+	</script>
 </head>
 <body>
 
@@ -11,22 +25,34 @@
 		<img th:src="@{/images/login/headerImg.png}" height="62px"/>
 	</div>
 	 <div id="center">
-<!--		 <img th:src="@{images/login/contentImg.jpg}" height="282px" width="500px"/>-->
 		 <div id="description">
 			 <h1>表象在猫，根源在人</h1>
 			 <span>我们都是城市生态系统的一部分</span>
 		 </div>
 		  <div id="center_middle">
-			  <form th:action="@{/loginAccount}" method="post">
-				   <div id="user">账 号
-					 <input type="text" name="account" />
-				   </div>
-				   <div id="password">密   码
-					 <input type="password" name="password" />
-				   </div>
+
+			  <form th:action="@{/loginAccount}" method="post" class="layui-form">
+				  <div class="layui-form-item" style="vertical-align:middle">
+					  <label class="layui-form-label">账号</label>
+					  <div class="layui-input-block">
+					   		<input type="text" name="account" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+					  </div>
+				  </div>
+				  <div class="layui-form-item">
+					  <label class="layui-form-label">密码</label>
+					  <div class="layui-input-block">
+						  <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+					  </div>
+				  </div>
 				  <span th:text="${msg}" style="color: darkred">lalala</span><br>
-				   <input value="登录" type="submit"/>
-			  </form><br>
+				  <div class="layui-form-item">
+					  <div class="layui-input-block">
+						  <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+						  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					  </div>
+				  </div>
+			  </form>
+			  <br>
 			  <a th:href="@{/register}">注册</a>
 		  </div>
 	 </div>

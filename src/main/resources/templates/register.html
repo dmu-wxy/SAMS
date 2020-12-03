@@ -11,21 +11,22 @@
 		<img th:src="@{/images/login/headerImg.png}" height="62px"/>
 	</div>
 	 <div id="center">
-		 <div>
-<!--			 <img th:src="@{images/login/contentImg.jpg}" height="282px" width="500px"/>-->
-			 <div id="center_middle">
-				  注册方式
-				  <form th:action="@{/registAccout}" method="post">
-					   <div id="user">账 号
-						 <input type="text" name="account" />
-					   </div>
-					   <div id="password">密   码
-						 <input type="password" name="password" />
-					   </div>
-						<span th:text="${msg}" style="color: darkred">lalala</span><br>
-					   <input value="注册" type="submit"/>
-				  </form>
-			 </div>
+		 <div id="description">
+			 <h1>表象在猫，根源在人</h1>
+			 <span>我们都是城市生态系统的一部分</span>
+		 </div>
+		 <div id="center_middle">
+			  注册方式
+			  <form th:action="@{/registAccout}" method="post">
+				   <div id="user">账 号
+					 <input type="text" name="account" />
+				   </div>
+				   <div id="password">密   码
+					 <input type="password" name="password" />
+				   </div>
+					<span th:text="${msg}" style="color: darkred">lalala</span><br>
+				   <input value="注册" type="submit"/>
+			  </form>
 		 </div>
 	 </div>
 	 <div id="down">
