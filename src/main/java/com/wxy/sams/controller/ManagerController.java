@@ -1,6 +1,7 @@
 package com.wxy.sams.controller;
 
 import com.wxy.sams.model.Manager;
+import com.wxy.sams.model.Msg;
 import com.wxy.sams.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Map;
 
 @Controller
 public class ManagerController {
 
     @Autowired
     private ManagerServiceImpl managerService;
+
+    private Msg msg;
 
     private Manager manager;
 
@@ -53,18 +55,33 @@ public class ManagerController {
             }
         }
     }
+//    @RequestMapping("/registAccount")
+//    public String regist(Model model,String account,String password, HttpServletResponse response){
+//        this.manager = new Manager();
+//        if(managerService.isExists(account)){
+//            model.addAttribute("msg","该账号已经被注册过");
+//            return "register";
+//        }
+//        this.manager = managerService.insertManager(account,password);
+//        Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
+//        cookie.setMaxAge(30);
+//        response.addCookie(cookie);
+//        return "index";
+//    }
+
     @RequestMapping("/registAccount")
-    public String regist(Model model,String account,String password, HttpServletResponse response){
+    public Msg regist(String account,String password,HttpServletResponse response){
         this.manager = new Manager();
         if(managerService.isExists(account)){
-            model.addAttribute("msg","该账号已经被注册过");
-            return "register";
+            msg = new Msg(1001,"该账号已经被注册过",null);
+        }else {
+            this.manager = managerService.insertManager(account, password);
+            Cookie cookie = new Cookie("mid", String.valueOf(this.manager.getMid()));
+            cookie.setMaxAge(30);
+            response.addCookie(cookie);
+            msg = new Msg(200, "success",this.manager.toString());
         }
-        this.manager = managerService.insertManager(account,password);
-        Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
-        cookie.setMaxAge(30);
-        response.addCookie(cookie);
-        return "index";
+        return msg;
     }
 
     /**

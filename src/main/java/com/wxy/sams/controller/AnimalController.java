@@ -1,7 +1,7 @@
 package com.wxy.sams.controller;
 
 import com.wxy.sams.model.Animal;
-import com.wxy.sams.model.AnimalMsg;
+import com.wxy.sams.model.Msg;
 import com.wxy.sams.service.impl.AnimalServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

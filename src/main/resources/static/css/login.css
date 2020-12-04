@@ -31,6 +31,7 @@ body{margin:0; padding:0;}
     align-items: center;
 }
 #center_middle .title {
+    background: #eff4fa;
     height: 50px;
     border-bottom: 1px solid #8D8D8D;
     display: flex;
