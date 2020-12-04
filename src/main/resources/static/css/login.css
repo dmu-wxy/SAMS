@@ -1,8 +1,19 @@
-body{margin:0; padding:0; font-size:12px;}
+body{margin:0; padding:0;}
 .header{background: #eff4fa; width: 100%; height: 62px;border-bottom: 1px solid #d6dfea}
 
-#center{background:url("../images/login/cat.jpg") no-repeat; background-position: 38% center;  width: 100%;position: absolute;top: 62px;bottom:36px;left: 0px;padding-top: 75px;display: flex;
-    justify-content: space-between; }
+#center{
+    background:url("../images/login/cat.jpg") no-repeat;
+    background-position: 38% center;
+    width: 100%;
+    position: absolute;
+    top: 62px;
+    bottom:36px;
+    left: 0px;
+    padding-top: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+
 #center_middle{
     width:334px;
     height:387px;
@@ -12,6 +23,34 @@ body{margin:0; padding:0; font-size:12px;}
     position: relative;
     right: 15%;
     z-index: 100 !important;
+}
+
+#center_middle .login-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#center_middle .title {
+    height: 50px;
+    border-bottom: 1px solid #8D8D8D;
+    display: flex;
+    justify-content: space-around;
+    color: #ccc;
+    font-size: 18px;
+    align-items: center;
+    cursor: pointer;
+}
+
+#center_middle .title span {
+    transition: all .15s ease;
+}
+#center_middle .title .selected {
+    color: black;
+}
+#center_middle .login-form, #center_middle .register-form  {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #description {
@@ -26,7 +65,7 @@ body{margin:0; padding:0; font-size:12px;}
 #description span {
    margin-top: 10px;
     size: A5;
-    color: #ccc;
+    color: #3e3e3e;
 }
 #down{width:100%; height:36px;position: fixed;bottom: 0px;background-color: #eff4fa;border-top: 1px solid #d6dfea;text-align: center;color: #b6b6b6;}
 

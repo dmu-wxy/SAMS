@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Controller
 public class ManagerController {
@@ -31,7 +33,8 @@ public class ManagerController {
     }
 
     @RequestMapping("/loginAccount")
-    public String login(String account, String password, Model model, HttpServletResponse response){
+    public String login(String account, String password, Model model, HttpServletResponse response, HttpServletRequest request){
+        System.out.println(account + "..." + password);
         Manager manager = managerService.findManager(account);
         if(manager == null){
             model.addAttribute("msg","账号不存在");
@@ -50,7 +53,7 @@ public class ManagerController {
             }
         }
     }
-    @RequestMapping("/registAccout")
+    @RequestMapping("/registAccount")
     public String regist(Model model,String account,String password, HttpServletResponse response){
         this.manager = new Manager();
         if(managerService.isExists(account)){
