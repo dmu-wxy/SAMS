@@ -12,6 +12,7 @@
 		//Demo
 		layui.use('form', function(){
 			var form = layui.form;
+			var m = document.getElementsById("msg");
 			console.log(form)
 			//监听提交
 			form.on('submit(formDemo)', function(data){
@@ -20,7 +21,10 @@
 				const url = info === '注册'? '/registAccount' : '/loginAccount'
 				request(url, "POST", data.field).then((res) => {
 					//console.log(res.data.token)
-					//location.href = '/index'
+					if(res.data.msg.code == "200")
+						location.href = '/index'
+					else
+						m.html(msg);
 				})
 				.catch(err => {
 					console.log(err)
@@ -62,8 +66,8 @@
 					  <span th:text="${msg}" style="color: darkred">lalala</span><br>
 					  <div class="layui-form-item">
 						  <div class="layui-input-block">
+							  <div id="msg"></div>
 							  <button class="layui-btn toggle"  lay-submit lay-filter="formDemo">注册</button>
-
 							  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						  </div>
 					  </div>
@@ -86,6 +90,7 @@
 					  <span th:text="${msg}" style="color: darkred">lalala</span><br>
 					  <div class="layui-form-item">
 						  <div class="layui-input-block">
+							  <div id="msg"></div>
 							  <button class="layui-btn toggle"  lay-submit lay-filter="formDemo">登录</button>
 							  <button type="reset" class="layui-btn layui-btn-primary">重置</button>
 						  </div>
