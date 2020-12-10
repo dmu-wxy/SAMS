@@ -3,8 +3,6 @@ mybatis:
     map-underscore-to-camel-case: false
 
 spring:
-  resource:
-    static-path-pattern: classpath:static/
   mvc:
     format:
       date: yyyy-MM-dd
@@ -32,4 +30,8 @@ spring:
   servlet:
     multipart:
       max-file-size: 1MB
-
+  redis:
+    host: smartdog.top
+    database: 0
+    port: 6379
+    password: meteor

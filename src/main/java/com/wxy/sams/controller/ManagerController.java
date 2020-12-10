@@ -55,20 +55,6 @@ public class ManagerController {
             }
         }
     }
-//    @RequestMapping("/registAccount")
-//    public String regist(Model model,String account,String password, HttpServletResponse response){
-//        this.manager = new Manager();
-//        if(managerService.isExists(account)){
-//            model.addAttribute("msg","该账号已经被注册过");
-//            return "register";
-//        }
-//        this.manager = managerService.insertManager(account,password);
-//        Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
-//        cookie.setMaxAge(30);
-//        response.addCookie(cookie);
-//        return "index";
-//    }
-
     @RequestMapping("/registAccount")
     public Msg regist(String account,String password,HttpServletResponse response){
         this.manager = new Manager();
