@@ -35,3 +35,10 @@ spring:
     database: 0
     port: 6379
     password: meteor
+  #devtools:
+    #restart:
+      #exclude: classpath:/static/** #从不触发自动重启的目录中除去
+      #additional-paths: src/main/resources/templates #将目录加入到改变自动重启
+      #trigger-file: .trigger-file #该文件修改才会重启
+  cache:
+    cache-names: c1
