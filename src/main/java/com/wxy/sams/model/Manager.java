@@ -2,10 +2,11 @@ package com.wxy.sams.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class Manager {
+public class Manager implements Serializable {
 
     private int mid;
 

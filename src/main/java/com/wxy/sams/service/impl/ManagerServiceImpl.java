@@ -52,7 +52,6 @@ public class ManagerServiceImpl implements ManagerService {
         return managerMapper.isExistsByEmail(memail) == 0 ? false : true;
     }
 
-    //todo: 判断了太多次是邮箱还是电话
     public boolean isExists(String account){
         if(account.indexOf("@") < 0)
             return isExistsByPhone(account);

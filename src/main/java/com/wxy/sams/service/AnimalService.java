@@ -9,11 +9,11 @@ import java.util.List;
 public interface AnimalService {
     public List<Animal> findAll();
 
-    public Animal findById(int aid);
+    public Animal findById(Integer aid);
 
     public void insert(Animal animal);
 
     public void update(Animal animal);
 
-    public void delete(int aid);
+    public void delete(Integer aid);
 }

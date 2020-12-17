@@ -8,6 +8,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +28,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     @Cacheable(key = "#aid")
-    public Animal findById(int aid) {
+    public Animal findById(Integer aid) {
         return animalMapper.findById(aid);
     }
 
@@ -38,13 +40,15 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     @CachePut(key = "#animal.aid")
+    @PreAuthorize("hasRole('admin')")
     public void update(Animal animal) {
         animalMapper.update(animal);
     }
 
     @Override
     @CacheEvict(key = "#aid")
-    public void delete(int aid) {
+    @Secured("ROLE_admin")
+    public void delete(Integer aid) {
         animalMapper.delete(aid);
     }
 }
