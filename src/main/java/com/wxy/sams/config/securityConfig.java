@@ -2,6 +2,7 @@ package com.wxy.sams.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -32,12 +33,11 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 //            .and()
 //            .csrf().disable()  // 要用postman接口测试，关闭csrf攻击  登录是post请求
 //            .headers().frameOptions().sameOrigin();
-        http.authorizeRequests((requests) -> {
-            ((ExpressionUrlAuthorizationConfigurer.AuthorizedUrl)requests.anyRequest()).authenticated();
-        });
-        http.formLogin();
-        http.httpBasic();
-        http.headers().frameOptions().sameOrigin();
+        http.requestMatcher(EndpointRequest.toAnyEndpoint())
+                .authorizeRequests()
+                .anyRequest().hasRole("admin")
+                .and()
+                .httpBasic();
     }
 
     @Bean

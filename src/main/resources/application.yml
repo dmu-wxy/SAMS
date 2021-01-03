@@ -60,4 +60,25 @@ spring:
 #      name: meteor
 #      roles: admin
 
+management:
+  endpoint:
+    shutdown:
+      enabled: true  # 开启shutdown端点
+    health:
+      show-details: when_authorized
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # 暴露所有端点
+  info:
+    git:
+      mode: full
 
+info:
+  app:
+    java:
+      source: @java.version@  #需要在pom中配置资源位置
+      target: @java.version@
+  author:
+    name: meteor
+    address: www.smartdog.top
