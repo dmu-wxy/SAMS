@@ -42,9 +42,22 @@ spring:
       #trigger-file: .trigger-file #该文件修改才会重启
   cache:
     cache-names: c1
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 2290502632@qq.com
+    password: mjeqregqbjmidhja
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+        debug: true
 #  security:
 #    user:
 #      password: 123456
 #      name: meteor
 #      roles: admin
+
 

@@ -4,10 +4,13 @@ import com.wxy.sams.mapper.ManagerMapper;
 import com.wxy.sams.model.Manager;
 import com.wxy.sams.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ManagerServiceImpl implements ManagerService {
+public class ManagerServiceImpl implements ManagerService , UserDetailsService {
 
     @Autowired
     private ManagerMapper managerMapper;
@@ -79,5 +82,10 @@ public class ManagerServiceImpl implements ManagerService {
         manager.setPassword(password);
         insert(manager);
         return findManager(account);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return null;
     }
 }

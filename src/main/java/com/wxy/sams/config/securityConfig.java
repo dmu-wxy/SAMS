@@ -4,6 +4,8 @@ package com.wxy.sams.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -49,5 +51,20 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("meteor").password("$2a$10$9BisuXCe6ZFRorvgs1CFiOjN/PR0/EqcUod7h5NBb3NVCbgwoIdRi").roles("admin")
                 .and()
                 .withUser("smartdog").password("$2a$10$/55kdJmt.NMyeFdaCJR0w.rfYpHvs1Na7MSz4pCQxEvdU27yr4uB6").roles("user");
+
+        //auth.userDetailsService(managerServiceImpl);
+    }
+
+    /**
+     * 角色继承关系
+     * @return
+     */
+    @Bean
+    RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        //dba有admin的权限，admind有user的权限，以换行符分割
+        String hierarchy = "ROLE_dba > ROLE_admin \n ROLE_admin > ROLE_user";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
     }
 }
