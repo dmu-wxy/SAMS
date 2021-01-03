@@ -51,4 +51,5 @@ public class AnimalServiceImpl implements AnimalService {
     public void delete(Integer aid) {
         animalMapper.delete(aid);
     }
+
 }
