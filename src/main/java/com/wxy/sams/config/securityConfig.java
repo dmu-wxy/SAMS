@@ -1,6 +1,8 @@
 package com.wxy.sams.config;
 
 
+import com.wxy.sams.service.ManagerService;
+import com.wxy.sams.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +12,8 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,26 +21,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
 public class securityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .authorizeRequests()   //开启配置
-//            .antMatchers("/res/**", "/admin", "/thirdparty/**", "/auth/login").permitAll() //设置路径
-//            .antMatchers("/admin/**").hasAuthority("admin:index") //hasAuthority 必须有。。。角色
-//            .anyRequest().authenticated()  //其他路径认证之后就能访问
-//            .and()
-//            .formLogin().loginPage("/admin").permitAll() //登录表单   处理登录请求的url  允许所有
-//            .and()
-//            .logout().logoutUrl("/admin/logout").logoutSuccessUrl("/admin").invalidateHttpSession(true)
-//            .and()
-//            .csrf().disable()  // 要用postman接口测试，关闭csrf攻击  登录是post请求
-//            .headers().frameOptions().sameOrigin();
-        http.requestMatcher(EndpointRequest.toAnyEndpoint())
-                .authorizeRequests()
-                .anyRequest().hasRole("admin")
-                .and()
-                .httpBasic();
-    }
+
+    @Autowired
+    private ManagerServiceImpl managerServiceImpl;
 
     @Bean
     PasswordEncoder passwordEncoder(){
@@ -47,13 +32,25 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void confiure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("meteor").password("$2a$10$9BisuXCe6ZFRorvgs1CFiOjN/PR0/EqcUod7h5NBb3NVCbgwoIdRi").roles("admin")
-                .and()
-                .withUser("smartdog").password("$2a$10$/55kdJmt.NMyeFdaCJR0w.rfYpHvs1Na7MSz4pCQxEvdU27yr4uB6").roles("user");
-
-        //auth.userDetailsService(managerServiceImpl);
+        auth.userDetailsService(managerServiceImpl);
     }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/css/**", "/js/**", "/index.html", "/img/**", "/fonts/**", "/favicon.ico", "/verifyCode");
+    }
+
+
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.requestMatcher(EndpointRequest.toAnyEndpoint())
+                .authorizeRequests()
+                .anyRequest().hasRole("admin")
+                .and()
+                .httpBasic();
+    }
+
 
     /**
      * 角色继承关系

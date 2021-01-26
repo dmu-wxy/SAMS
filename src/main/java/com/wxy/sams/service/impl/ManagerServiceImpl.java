@@ -85,7 +85,12 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        Manager manager = managerMapper.findByName(userName);
+        if(manager == null){
+            throw new UsernameNotFoundException("用户名不存在!");
+        }
+        //设置角色，这里没有
+        return manager;
     }
 }

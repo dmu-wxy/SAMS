@@ -1,5 +1,6 @@
 package com.wxy.sams.controller;
 
+import com.wxy.sams.model.RespBean;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +18,7 @@ public class FileUploadController {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("/yyyy/MM/dd/");
 
     @PostMapping("/upload")
-    public String upload(MultipartFile multipartFile, HttpServletRequest request){
+    public RespBean upload(MultipartFile multipartFile, HttpServletRequest request){
         String format = simpleDateFormat.format(new Date());
         String realPath = request.getServletContext().getRealPath("/datas") + format;
         File folder = new File(realPath);
@@ -29,10 +30,10 @@ public class FileUploadController {
         try {
             multipartFile.transferTo(new File(folder,newName));
             String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/datas/" + format + newName;
-            return url;
+            return RespBean.ok(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "error";
+        return RespBean.error("未知错误");
     }
 }

@@ -2,11 +2,14 @@ package com.wxy.sams.model;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class Manager implements Serializable, UserDetails {
@@ -34,7 +37,9 @@ public class Manager implements Serializable, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //角色格式：ROLE_admin
-        return null;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        //加入角色，现在没有
+        return authorities;
     }
 
     @Override

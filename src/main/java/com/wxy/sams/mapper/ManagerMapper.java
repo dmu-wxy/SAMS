@@ -38,4 +38,7 @@ public interface ManagerMapper {
 
     @Select("select ifnull((select mid  from manager where memail = #{memail} limit 1 ), 0)")
     public int isExistsByEmail(String memail);
+
+    @Select("select * from manager where mname = #{userName}")
+    Manager findByName(String userName);
 }
