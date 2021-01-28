@@ -24,7 +24,7 @@ public class Manager implements Serializable, UserDetails {
 
     private String memail;
 
-    private String duty;
+    private int enabled;
 
     private int gender;
 
@@ -36,9 +36,7 @@ public class Manager implements Serializable, UserDetails {
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //角色格式：ROLE_admin
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        //加入角色，现在没有
         return authorities;
     }
 
@@ -80,6 +78,6 @@ public class Manager implements Serializable, UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return true; //可用
+        return enabled == 1; //可用
     }
 }

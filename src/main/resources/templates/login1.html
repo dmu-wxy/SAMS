@@ -109,11 +109,11 @@
 	var register = document.querySelector(".register")
 	var loginForm = document.querySelector(".login-form")
 	var registerForm = document.querySelector(".register-form")
-	login.addEventListener('click', ()=>{
-		console.log("login")
+	login1.addEventListener('click', ()=>{
+		console.log("login1.html")
 		loginForm.style.display = 'none';
 		registerForm.style.display = 'block'
-		login.classList.add('selected')
+		login1.classList.add('selected')
 		register.classList.remove('selected')
 
 	})
@@ -121,7 +121,7 @@
 		console.log("register")
 		loginForm.style.display = 'block';
 		registerForm.style.display = 'none'
-		login.classList.remove('selected')
+		login1.classList.remove('selected')
 		register.classList.add('selected')
 	})
 

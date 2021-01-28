@@ -30,16 +30,17 @@ CREATE TABLE `manager` (
                            `mphone` varchar(255) DEFAULT NULL,
                            `memail` varchar(255) DEFAULT NULL,
                            `gender` int(11) DEFAULT NULL,
+                           `enabled` int(11) DEFAULT NULL,
                            `birth` date DEFAULT NULL,
                            PRIMARY KEY (`mid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of manager
+-- Records of manager  密码：123456
 -- ----------------------------
-INSERT INTO `manager`(mname, password, mphone, memail, gender, birth) VALUES ('Meteor', 'root', '15965076221', '2290502632@qq.com', '1', '1999-10-29');
-INSERT INTO `manager`(mname, password, mphone, memail, gender, birth) VALUES ('smartdog', '123456', '13204069875', '15965076221@163.com', '2', '1999-9-21');
-INSERT INTO `manager`(mname, password, mphone, memail, gender, birth) VALUES ('天才', '666666', '12345678910', '123456789@qq.com', '1', '1999-10-29');
+INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('Meteor', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '15965076221', '2290502632@qq.com', '1', '1','1999-10-29');
+INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('smartdog', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '13204069875', '15965076221@163.com', '2', '1','1999-9-21');
+INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('天才', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '12345678910', '123456789@qq.com', '1', '1','1999-10-29');
 
 -- ----------------------------
 -- Table structure for role(id,角色code，角色名称)

@@ -7,7 +7,6 @@ import com.wxy.sams.service.impl.ManagerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -24,38 +23,6 @@ public class ManagerController {
 
     private Manager manager;
 
-//    @RequestMapping("/")
-//    public String interceptor(Model model, @CookieValue(value = "mid",required = false)String mid){
-//        String toUrl = "index";
-//        if(mid == null){
-//            toUrl = "login";
-//            model.addAttribute("msg","");
-//        }
-//        System.out.println(toUrl);
-//        return toUrl;
-//    }
-
-    @RequestMapping("/loginAccount")
-    public RespBean login(String account, String password, Model model, HttpServletResponse response, HttpServletRequest request){
-        System.out.println(account + "..." + password);
-        Manager manager = managerService.findManager(account);
-        if(manager == null){
-            model.addAttribute("msg","账号不存在");
-            return RespBean.error("账号不存在");
-        }else{
-            if(!password.equals(manager.getPassword())){
-                model.addAttribute("msg","密码错误");
-                return RespBean.error("密码错误");
-            }else{
-                model.addAttribute("manager",manager);
-                this.manager = manager;
-                Cookie cookie = new Cookie("mid",String.valueOf(this.manager.getMid()));
-                cookie.setMaxAge(30);
-                response.addCookie(cookie);
-                return RespBean.ok("ok",this.manager);
-            }
-        }
-    }
     @RequestMapping("/registAccount")
     public RespBean regist(String account,String password,HttpServletResponse response){
         this.manager = new Manager();

@@ -34,7 +34,6 @@ class SamsApplicationTests {
     void createPassword(){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         System.out.println(encoder.encode("123456"));
-        System.out.println(encoder.encode("111111"));
     }
 
     @Test

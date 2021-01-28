@@ -12,15 +12,14 @@ import java.text.SimpleDateFormat;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/toSave").setViewName("save");
-        registry.addViewController("/index").setViewName("index");
-        registry.addViewController("/menu").setViewName("menu");
-        registry.addViewController("/header").setViewName("header");
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/register").setViewName("register");
-    }
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/toSave").setViewName("save");
+//        registry.addViewController("/index").setViewName("index");
+//        registry.addViewController("/menu").setViewName("menu");
+//        registry.addViewController("/header").setViewName("header");
+//        registry.addViewController("/register").setViewName("register");
+//    }
 
     /**
      * 之后用于json数据中日期格式的转换  yyyy-MM-dd
