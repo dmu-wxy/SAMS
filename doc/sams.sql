@@ -38,9 +38,9 @@ CREATE TABLE `manager` (
 -- ----------------------------
 -- Records of manager  密码：123456
 -- ----------------------------
-INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('Meteor', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '15965076221', '2290502632@qq.com', '1', '1','1999-10-29');
-INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('smartdog', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '13204069875', '15965076221@163.com', '2', '1','1999-9-21');
-INSERT INTO `manager`(mname, password, mphone, memail, gender, enabled, birth) VALUES ('天才', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '12345678910', '123456789@qq.com', '1', '1','1999-10-29');
+INSERT INTO `manager`(mid,mname, password, mphone, memail, gender, enabled, birth) VALUES (1,'Meteor', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '15965076221', '2290502632@qq.com', '1', '1','1999-10-29');
+INSERT INTO `manager`(mid,mname, password, mphone, memail, gender, enabled, birth) VALUES (2,'smartdog', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '13204069875', '15965076221@163.com', '2', '1','1999-9-21');
+INSERT INTO `manager`(mid,mname, password, mphone, memail, gender, enabled, birth) VALUES (3,'天才', '$2a$10$BfA2mtDp7fHvyjNq8rX65epX1VwfAV3C5nyfz1G4gtt7JFc5ta4y6', '12345678910', '123456789@qq.com', '1', '1','1999-10-29');
 
 -- ----------------------------
 -- Table structure for role(id,角色code，角色名称)

@@ -1,16 +1,34 @@
 package com.wxy.sams.model;
 
-public class menu {
+import java.util.List;
+
+public class Menu {
     private int id;
     private String url;
     private String path;
     private String component;
     private String name;
     private String iconCls;
-    private int keepAlive;
-    private int requireAuth;
+    private Meta meta;
     private int parentId;
-    private int enabled;
+    private boolean enabled;
+    private List<Menu> children;
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
 
     public int getId() {
         return id;
@@ -60,22 +78,6 @@ public class menu {
         this.iconCls = iconCls;
     }
 
-    public int getKeepAlive() {
-        return keepAlive;
-    }
-
-    public void setKeepAlive(int keepAlive) {
-        this.keepAlive = keepAlive;
-    }
-
-    public int getRequireAuth() {
-        return requireAuth;
-    }
-
-    public void setRequireAuth(int requireAuth) {
-        this.requireAuth = requireAuth;
-    }
-
     public int getParentId() {
         return parentId;
     }
@@ -84,11 +86,11 @@ public class menu {
         this.parentId = parentId;
     }
 
-    public int getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 }

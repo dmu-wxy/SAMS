@@ -2,7 +2,6 @@ package com.wxy.sams.mapper;
 
 import com.wxy.sams.model.Animal;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
