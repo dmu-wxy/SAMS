@@ -13,6 +13,19 @@ public class Menu {
     private int parentId;
     private boolean enabled;
     private List<Menu> children;
+    private List<Role> roles;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public List<Menu> getChildren() {
         return children;

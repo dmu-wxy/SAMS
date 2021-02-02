@@ -23,21 +23,6 @@ public class ManagerController {
 
     private Manager manager;
 
-    @RequestMapping("/registAccount")
-    public RespBean regist(String account,String password,HttpServletResponse response){
-        this.manager = new Manager();
-        if(managerService.isExists(account)){
-            msg = new Msg(1001,"该账号已经被注册过",null);
-            return RespBean.error("账号已经被注册");
-        }else {
-            this.manager = managerService.insertManager(account, password);
-            Cookie cookie = new Cookie("mid", String.valueOf(this.manager.getMid()));
-            cookie.setMaxAge(30);
-            response.addCookie(cookie);
-            msg = new Msg(200, "success",this.manager.toString());
-            return RespBean.ok("success");
-        }
-    }
 
     /**
      * 我的信息  页面
@@ -72,18 +57,5 @@ public class ManagerController {
         }
     }
 
-    /**
-     * 从 我的页面 跳转到  更新我的信息  页面
-     * @param mid
-     * @param model
-     * @return
-     */
-    @RequestMapping("/toUpdateMyInfo")
-    public RespBean toUpdateMyInfo(String mid,Model model){
-        this.manager = managerService.findById(mid);
-        model.addAttribute("manager",manager);
-        model.addAttribute("msg1","");
-        model.addAttribute("msg2","");
-        return RespBean.ok("ok",manager);
-    }
+
 }

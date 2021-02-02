@@ -55,34 +55,6 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
         return managerMapper.isExistsByEmail(memail) == 0 ? false : true;
     }
 
-    public boolean isExists(String account){
-        if(account.indexOf("@") < 0)
-            return isExistsByPhone(account);
-        else
-            return isExistsByEmail(account);
-    }
-
-    public Manager findManager(String account){
-        if (account.indexOf("@") < 0) {
-            //电话
-            return findByPhone(account);
-        } else {
-            //邮箱
-            return findByEmail(account);
-        }
-    }
-
-    public Manager insertManager(String account,String password){
-        Manager manager = new Manager();
-        if(account.indexOf("@") < 0){
-            manager.setMphone(account);
-        }else{
-            manager.setMemail(account);
-        }
-        manager.setPassword(password);
-        insert(manager);
-        return findManager(account);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -90,7 +62,7 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
         if(manager == null){
             throw new UsernameNotFoundException("用户名不存在!");
         }
-        //设置角色，这里没有
+        manager.setRoles(managerMapper.getManagerRoleById(manager.getMid()));
         return manager;
     }
 }

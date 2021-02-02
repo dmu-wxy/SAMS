@@ -26,4 +26,13 @@ public interface MenuMapper {
             "where m1.id = m2.parentId and m1.id = #{id} and mrr.mid = #{mid} and mrr.rid = mr.rid and mr.mid = m2.id and m2.enabled = true")
     @Result(column = "{id = id,mid = mid}",property = "meta",one=@One(select="com.wxy.sams.mapper.MetaMapper.getMetasById",fetchType= FetchType.EAGER))
     public List<Menu> getMenusById(Integer id,Integer mid);
+
+
+
+    @Select("select m.*,r.id as rid " +
+            "from menu m,menu_role mr,role r where m.id = mr.mid and mr.rid = r.id order by m.id")
+    @Result(column = "rid",property = "roles",many = @Many(select = "com.wxy.sams.mapper.RoleMapper.getRolesById",fetchType = FetchType.EAGER))
+    public List<Menu> getAllMenusWithRole();
+
+
 }

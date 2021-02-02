@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MenuService {
     public List<Menu> getMenuById();
+
+    public List<Menu> getAllMenusWithRole();
 }

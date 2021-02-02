@@ -21,4 +21,9 @@ public class MenuServiceImpl implements MenuService {
         Integer id = ((Manager)(SecurityContextHolder.getContext().getAuthentication().getPrincipal())).getMid();
         return id != null ? menuMapper.getMenuById(id) : null;
     }
+
+    @Override
+    public List<Menu> getAllMenusWithRole() {
+        return menuMapper.getAllMenusWithRole();
+    }
 }

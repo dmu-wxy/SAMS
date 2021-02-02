@@ -1,10 +1,13 @@
 package com.wxy.sams.mapper;
 
 import com.wxy.sams.model.Manager;
+import com.wxy.sams.model.Role;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 public interface ManagerMapper {
 
@@ -41,4 +44,7 @@ public interface ManagerMapper {
 
     @Select("select * from manager where mname = #{userName}")
     Manager findByName(String userName);
+
+    @Select("select r.* from role r,manage_role mrr where r.id = mrr.rid and mrr.mid = #{mid}")
+    List<Role> getManagerRoleById(int mid);
 }

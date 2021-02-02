@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
+import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -35,6 +39,12 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private ManagerServiceImpl managerServiceImpl;
 
+    @Autowired
+    ManagerFilterInvocationSecurityMetaDataSource managerFilterInvocationSecurityMetaDataSource;
+
+    @Autowired
+    ManagerUrlDecisionManager managerUrlDecisionManager;
+
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -48,7 +58,15 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
+                .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
+                    @Override
+                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
+                        o.setAccessDecisionManager(managerUrlDecisionManager);
+                        o.setSecurityMetadataSource(managerFilterInvocationSecurityMetaDataSource);
+                        return o;
+                    }
+                })
                 .and()
                 .formLogin()
                 .usernameParameter("username")
@@ -106,6 +124,25 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
                 .and()
-                .csrf().disable();
+                .csrf().disable().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
+                    //没有认证时，在这里处理结果
+            @Override
+            public void commence(HttpServletRequest request, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
+                resp.setContentType("application/json;charset=utf-8");
+                PrintWriter writer = resp.getWriter();
+                RespBean error = RespBean.error("访问失败！");
+                if(e instanceof InsufficientAuthenticationException){
+                    error.setMsg("请求失败，请联系管理员");
+                }
+                writer.write(new ObjectMapper().writeValueAsString(error));
+                writer.flush();
+                writer.close();
+            }
+        });
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/login");
     }
 }

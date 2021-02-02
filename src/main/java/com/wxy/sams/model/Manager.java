@@ -30,15 +30,20 @@ public class Manager implements Serializable, UserDetails {
 
     private Date birth;
 
+    private List<Role> roles;
     /**
      * 返回用户所有角色
      * @return
      */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
         return authorities;
     }
+
 
     @Override
     public String getUsername() {
