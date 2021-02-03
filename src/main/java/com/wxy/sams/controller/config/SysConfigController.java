@@ -1,4 +1,4 @@
-package com.wxy.sams.controller;
+package com.wxy.sams.controller.config;
 
 import com.wxy.sams.model.Menu;
 import com.wxy.sams.service.MenuService;

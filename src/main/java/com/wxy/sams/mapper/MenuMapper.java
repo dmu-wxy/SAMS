@@ -34,5 +34,4 @@ public interface MenuMapper {
     @Result(column = "rid",property = "roles",many = @Many(select = "com.wxy.sams.mapper.RoleMapper.getRolesById",fetchType = FetchType.EAGER))
     public List<Menu> getAllMenusWithRole();
 
-
 }
