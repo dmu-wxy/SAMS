@@ -9,4 +9,8 @@ public interface MenuService {
     public List<Menu> getMenuById();
 
     public List<Menu> getAllMenusWithRole();
+
+    public List<Menu> getAllMenus();
+
+    public List<Integer> getMidByRid(Integer rid);
 }

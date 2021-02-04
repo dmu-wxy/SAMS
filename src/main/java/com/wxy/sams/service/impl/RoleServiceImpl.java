@@ -3,6 +3,7 @@ package com.wxy.sams.service.impl;
 import com.wxy.sams.mapper.RoleMapper;
 import com.wxy.sams.model.RespBean;
 import com.wxy.sams.model.Role;
+import com.wxy.sams.service.MenuService;
 import com.wxy.sams.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
+
     @Override
     public List<Role> getAllRoles() {
         return roleMapper.getAllRoles();

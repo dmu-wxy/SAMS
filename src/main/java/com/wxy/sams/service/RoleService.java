@@ -1,5 +1,6 @@
 package com.wxy.sams.service;
 
+import com.wxy.sams.model.Menu;
 import com.wxy.sams.model.Role;
 
 import java.util.List;

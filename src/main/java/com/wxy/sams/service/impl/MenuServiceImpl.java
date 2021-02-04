@@ -26,4 +26,14 @@ public class MenuServiceImpl implements MenuService {
     public List<Menu> getAllMenusWithRole() {
         return menuMapper.getAllMenusWithRole();
     }
+
+    @Override
+    public List<Menu> getAllMenus() {
+        return menuMapper.getAllMenus();
+    }
+
+    @Override
+    public List<Integer> getMidByRid(Integer rid) {
+        return menuMapper.getMidByRid(rid);
+    }
 }
