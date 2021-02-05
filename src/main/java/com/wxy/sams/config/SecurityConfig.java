@@ -34,7 +34,7 @@ import java.io.PrintWriter;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
-public class securityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private ManagerServiceImpl managerServiceImpl;
@@ -129,6 +129,7 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void commence(HttpServletRequest request, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
                 resp.setContentType("application/json;charset=utf-8");
+                resp.setStatus(401);
                 PrintWriter writer = resp.getWriter();
                 RespBean error = RespBean.error("访问失败！");
                 if(e instanceof InsufficientAuthenticationException){

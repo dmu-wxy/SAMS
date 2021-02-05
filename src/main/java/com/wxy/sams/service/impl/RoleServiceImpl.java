@@ -22,6 +22,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Integer addRole(Role role) {
+        if(!role.getName().startsWith("ROLE_")){
+            role.setName("ROLE_" + role.getName());
+        }
         return roleMapper.addRole(role);
     }
 

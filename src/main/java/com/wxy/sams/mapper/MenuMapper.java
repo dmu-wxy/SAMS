@@ -43,12 +43,18 @@ public interface MenuMapper {
 
 
 
-    @Select("select * from menu where parentId is null")
-    @Result(column = "id",property = "children",many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusChildren",fetchType = FetchType.EAGER))
+    @Select("select id,name from menu where parentId is null")
+    @Results({
+            @Result(column = "id",property = "id"),
+            @Result(column = "id", property = "children", many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusChildren", fetchType = FetchType.EAGER))
+    })
     public List<Menu> getAllMenus();
 
     @Select("select id,name from menu where parentId = #{id}")
-    @Result(column = "id",property = "children",many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusGrandchild",fetchType = FetchType.EAGER))
+    @Results({
+            @Result(column = "id",property = "id"),
+        @Result(column = "id",property = "children",many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusGrandchild",fetchType = FetchType.EAGER))
+    })
     public List<Menu> getAllMenusChildren(Integer id);
 
     @Select("select id,name from menu where parentId = #{id}")
