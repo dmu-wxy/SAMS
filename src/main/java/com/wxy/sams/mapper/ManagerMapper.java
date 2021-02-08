@@ -2,49 +2,47 @@ package com.wxy.sams.mapper;
 
 import com.wxy.sams.model.Manager;
 import com.wxy.sams.model.Role;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.FetchType;
 
 import java.util.List;
 
 public interface ManagerMapper {
 
-    @Insert("insert into manager(mname,mphone,memail,duty,gender,birth,password) " +
-            "values(#{mname},#{mphone},#{memail},#{duty},#{gender},#{birth},#{password})")
-    public void insert(Manager manager);
 
     @Update("update manager set mname = #{mname}," +
             "mphone = #{mphone}," +
             "memail = #{memail}," +
-            "duty = #{duty}," +
             "gender = #{gender}, " +
-            "birth = #{birth} " +
+            "birth = #{birth}," +
+            "enabled = #{enabled} " +
             "where mid = #{mid}")
-    public void update(Manager manager);
+    public int update(Manager manager);
 
     @Delete("delete from manager where mid = #{mid}")
-    public void delete(int mid);
-
-    @Select("select * from manager where mphone = #{mphone}")
-    public Manager findByPhone(String mphone);
-
-    @Select("select * from manager where memail = #{memail}")
-    public Manager findByEmail(String memail);
+    public int delete(int mid);
 
     @Select("select * from manager where mid = #{mid}")
     public Manager findById(String mid);
 
-    @Select("select ifnull((select mid  from manager where mphone = #{mphone} limit 1 ), 0)")
-    public int isExistsByPhone(String mphone);
+    @Select("select r.* from role r,manage_role mrr where r.id = mrr.rid and mrr.mid = #{mid}")
+    List<Role> getManagerRoleById(int mid);
 
-    @Select("select ifnull((select mid  from manager where memail = #{memail} limit 1 ), 0)")
-    public int isExistsByEmail(String memail);
+    @Select({
+            "<script>",
+            "select * from manager where mid != #{mid} ",
+            "<if test='keywords != null'>",
+            " and manager.mname like concat('%',#{keywords},'%')",
+            "</if>",
+            "order by manager.mid",
+            "</script>"
+    })
+    @Results({
+            @Result(column = "mid",property = "mid"),
+            @Result(column = "mid",property = "roles",many = @Many(select = "com.wxy.sams.mapper.RoleMapper.getRolesByMid",fetchType = FetchType.EAGER))
+    })
+    List<Manager> getAllManagers(int mid,@Param("keywords") String keywords);
 
     @Select("select * from manager where mname = #{userName}")
     Manager findByName(String userName);
-
-    @Select("select r.* from role r,manage_role mrr where r.id = mrr.rid and mrr.mid = #{mid}")
-    List<Role> getManagerRoleById(int mid);
 }

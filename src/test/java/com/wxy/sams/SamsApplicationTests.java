@@ -25,10 +25,7 @@ class SamsApplicationTests {
     @Autowired
     JavaMailSender javaMailSender;
 
-    @Test
-    void contextLoads() {
-        System.out.println(managerService.findByEmail("2290502632@qq.com"));
-    }
+
 
     @Test
     void createPassword(){

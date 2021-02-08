@@ -9,9 +9,21 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 public interface RoleMapper {
-    //todo: 这个地方貌似只能返回一个
+    /**
+     * 根据角色id查询角色
+     * @param id
+     * @return
+     */
     @Select("select * from role where id = #{id}")
     public List<Role> getRolesById(Integer id);
+
+    /**
+     * 根据操作员id查询拥有的角色
+     * @param mid
+     * @return
+     */
+    @Select("select * from role r,manage_role mr where r.id = mr.rid and mr.mid = #{mid}")
+    public List<Role> getRolesByMid(Integer mid);
 
     @Select("select * from role")
     public List<Role> getAllRoles();

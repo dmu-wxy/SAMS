@@ -10,6 +10,7 @@ public interface MenuMapper {
 
     /**
      * 根据manager的id返回可访问的菜单
+     * todo:需优化
      * @param id
      * @return
      */
@@ -24,6 +25,12 @@ public interface MenuMapper {
     public List<Menu> getMenuById(Integer id);
 
 
+    /**
+     * todo:需优化
+     * @param id
+     * @param mid
+     * @return
+     */
     @Select("select distinct " +
             "m2.*,mrr.mid " +
             "from menu m1,menu m2,manage_role mrr,menu_role mr " +
@@ -34,6 +41,7 @@ public interface MenuMapper {
 
     /**
      * 获得所有url所需的角色，登录用
+     * todo:需优化
      * @return 带有角色的菜单
      */
     @Select("select m.*,mr.rid as rid " +

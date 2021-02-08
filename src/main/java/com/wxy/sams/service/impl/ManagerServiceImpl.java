@@ -1,13 +1,18 @@
 package com.wxy.sams.service.impl;
 
 import com.wxy.sams.mapper.ManagerMapper;
+import com.wxy.sams.mapper.ManagerRoleMapper;
 import com.wxy.sams.model.Manager;
 import com.wxy.sams.service.ManagerService;
+import com.wxy.sams.util.ManagerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class ManagerServiceImpl implements ManagerService , UserDetailsService {
@@ -15,10 +20,8 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
     @Autowired
     private ManagerMapper managerMapper;
 
-    @Override
-    public void insert(Manager manager) {
-        managerMapper.insert(manager);
-    }
+    @Autowired
+    private ManagerRoleMapper managerRoleMapper;
 
     @Override
     public void update(Manager manager) {
@@ -26,33 +29,36 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
     }
 
     @Override
-    public void delete(int mid) {
-        managerMapper.delete(mid);
+    public Integer delete(int mid) {
+        return managerMapper.delete(mid);
     }
 
-    @Override
-    public Manager findByPhone(String mphone) {
-        return managerMapper.findByPhone(mphone);
-    }
-
-    @Override
-    public Manager findByEmail(String memail) {
-        return managerMapper.findByEmail(memail);
-    }
 
     @Override
     public Manager findById(String mid) {
         return managerMapper.findById(mid);
     }
 
+
     @Override
-    public boolean isExistsByPhone(String mphone) {
-        return managerMapper.isExistsByPhone(mphone) == 0 ? false : true;
+    public List<Manager> getAllManagers(String keywords) {
+        List<Manager> allManagers = managerMapper.getAllManagers(ManagerUtils.getCurrentManager().getMid(),keywords);
+        allManagers.forEach(manager -> {
+            manager.setPassword("");
+        });
+        return allManagers;
     }
 
     @Override
-    public boolean isExistsByEmail(String memail) {
-        return managerMapper.isExistsByEmail(memail) == 0 ? false : true;
+    public int updateManager(Manager manager) {
+        return managerMapper.update(manager);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateManagerRole(Integer mid, Integer[] rids) {
+        managerRoleMapper.deleteByManagerId(mid);
+        return managerRoleMapper.addRole(mid,rids) == rids.length;
     }
 
 

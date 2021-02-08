@@ -1,5 +1,6 @@
 package com.wxy.sams.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,7 +25,7 @@ public class Manager implements Serializable, UserDetails {
 
     private String memail;
 
-    private int enabled;
+    private boolean enabled;
 
     private int gender;
 
@@ -36,6 +37,7 @@ public class Manager implements Serializable, UserDetails {
      * @return
      */
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
         for (Role role : roles) {
@@ -46,6 +48,7 @@ public class Manager implements Serializable, UserDetails {
 
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return mname;
     }
@@ -55,6 +58,7 @@ public class Manager implements Serializable, UserDetails {
      * @return
      */
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true; //是 没有过期
     }
@@ -64,6 +68,7 @@ public class Manager implements Serializable, UserDetails {
      * @return
      */
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true; //是 未锁定
     }
@@ -73,6 +78,7 @@ public class Manager implements Serializable, UserDetails {
      * @return
      */
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true; //是 未过期
     }
@@ -83,6 +89,6 @@ public class Manager implements Serializable, UserDetails {
      */
     @Override
     public boolean isEnabled() {
-        return enabled == 1; //可用
+        return enabled; //可用
     }
 }
