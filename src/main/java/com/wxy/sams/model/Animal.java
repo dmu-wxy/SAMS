@@ -24,7 +24,7 @@ public class Animal implements Serializable {
     private String p_addr;
 
     @ApiModelProperty(value = "流浪动物性别")
-    private int gender;
+    private String gender;
 
     @ApiModelProperty(value = "流浪动物生日")
     private Date birth;

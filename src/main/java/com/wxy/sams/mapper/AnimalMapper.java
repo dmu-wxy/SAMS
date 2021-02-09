@@ -15,15 +15,37 @@ public interface AnimalMapper {
 
     @Insert("insert into animal(aname,breed,p_addr,gender,birth) " +
             "values(#{aname},#{breed},#{p_addr},#{gender},#{birth})")
-    public void insert(Animal animal);
+    public int insert(Animal animal);
 
     @Update("update animal set aname = #{aname}," +
             "breed = #{breed}," +
             "p_addr = #{p_addr}," +
             "gender = #{gender}," +
             "birth = #{birth} where aid = #{aid}")
-    public void update(Animal animal);
+    public Integer update(Animal animal);
 
     @Delete("delete from animal where aid = #{aid}")
-    public void delete(int aid);
+    public Integer delete(int aid);
+
+
+    @Select({
+            "<script>",
+            "select * from animal ",
+            "<if test='keywords != null'>",
+            "where aname like concat('%',#{keywords},'%')",
+            "</if>",
+            "order by aid limit #{page},#{size}",
+            "</script>"
+    })
+    List<Animal> getAnimalByPage(Integer page, Integer size,@Param("keywords") String keywords);
+
+    @Select({
+            "<script>",
+            "select count(aid) from animal ",
+            "<if test = 'keywords != null' >",
+            "where aname like concat('%',#{keywords},'%')",
+            "</if>",
+            "</script>"
+    })
+    Long getTotal(@Param("keywords") String keywords);
 }

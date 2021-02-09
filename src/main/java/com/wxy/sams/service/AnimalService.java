@@ -2,18 +2,16 @@ package com.wxy.sams.service;
 
 
 import com.wxy.sams.model.Animal;
-import org.springframework.transaction.annotation.Transactional;
+import com.wxy.sams.model.RespPageBean;
 
-import java.util.List;
 
 public interface AnimalService {
-    public List<Animal> findAll();
 
-    public Animal findById(Integer aid);
+    public int insert(Animal animal);
 
-    public void insert(Animal animal);
+    public Integer update(Animal animal);
 
-    public void update(Animal animal);
+    public Integer delete(Integer aid);
 
-    public void delete(Integer aid);
+    RespPageBean getAnimalByPage(Integer page, Integer size, String keywords);
 }
