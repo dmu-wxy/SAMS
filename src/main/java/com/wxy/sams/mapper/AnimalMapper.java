@@ -34,7 +34,10 @@ public interface AnimalMapper {
             "<if test='keywords != null'>",
             "where aname like concat('%',#{keywords},'%')",
             "</if>",
-            "order by aid limit #{page},#{size}",
+            "order by aid ",
+            "<if test='page != null and size != null'>",
+            "limit #{page},#{size}",
+            "</if>",
             "</script>"
     })
     List<Animal> getAnimalByPage(Integer page, Integer size,@Param("keywords") String keywords);
