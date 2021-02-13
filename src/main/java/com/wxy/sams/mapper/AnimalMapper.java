@@ -51,4 +51,14 @@ public interface AnimalMapper {
             "</script>"
     })
     Long getTotal(@Param("keywords") String keywords);
+
+    @Insert({
+            "<script>",
+            "insert into animal(aname,breed,p_addr,gender,birth) values ",
+            "<foreach collection='animals' separator=',' item='animal'>",
+            "(#{animal.aname},#{animal.breed},#{animal.p_addr},#{animal.gender},#{animal.birth})",
+            "</foreach>",
+            "</script>"
+    })
+    int insertAnimals(@Param("animals") List<Animal> animals);
 }

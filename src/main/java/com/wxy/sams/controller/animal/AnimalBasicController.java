@@ -68,12 +68,9 @@ public class AnimalBasicController {
     @PostMapping("/import")
     public RespBean importData(MultipartFile file) throws IOException {
         List<Animal> animals = POIUtils.excel2Animal(file);
-        animals.forEach(animal -> {
-            if(animal.getAid() < 10){
-                System.out.println(animal);
-            }
-        });
-        System.out.println("total:" + animals.size());
-        return RespBean.ok("上传成功");
+        if(animalService.insertAnimals(animals) == animals.size()){
+            return RespBean.ok("上传成功");
+        }
+        return RespBean.error("上传失败");
     }
 }

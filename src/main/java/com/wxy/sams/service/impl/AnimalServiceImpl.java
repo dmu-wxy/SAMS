@@ -43,4 +43,9 @@ public class AnimalServiceImpl implements AnimalService {
         return respPageBean;
     }
 
+    @Override
+    public int insertAnimals(List<Animal> animals) {
+        return animalMapper.insertAnimals(animals);
+    }
+
 }
