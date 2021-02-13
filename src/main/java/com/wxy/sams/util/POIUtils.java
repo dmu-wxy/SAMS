@@ -10,9 +10,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class POIUtils {
@@ -99,5 +101,70 @@ public class POIUtils {
             e.printStackTrace();
         }
         return new ResponseEntity<byte[]>(baos.toByteArray(), headers, HttpStatus.CREATED);
+    }
+
+    /**
+     * excel解析成动物数据集合
+     * @param file
+     * @return
+     */
+    public static List<Animal> excel2Animal(MultipartFile file) {
+        List<Animal> animals = new ArrayList<>();
+        Animal animal = null;
+        try {
+            //1.创建一个workbook对象
+            HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
+            //2.获取workbook中的表单数量
+            int number = workbook.getNumberOfSheets();
+            for(int i = 0;i < number;i++){
+                //3.获取表单
+                HSSFSheet sheet = workbook.getSheetAt(i);
+                //4.获取表单的行数
+                int rows = sheet.getPhysicalNumberOfRows();
+                for(int j = 0;j < rows;j++){
+                    if(j == 0){
+                        continue;//跳过标题行
+                    }
+                    //5.获取行
+                    HSSFRow row = sheet.getRow(j);
+                    if(row == null){
+                        continue; //跳过空行
+                    }
+                    //6.获取列数
+                    int cells = row.getPhysicalNumberOfCells();
+                    animal = new Animal();
+                    for(int k = 0;k < cells;k++){
+                        HSSFCell cell = row.getCell(k);
+                        switch (cell.getCellType()){
+                            case STRING:
+                                String cellValue = cell.getStringCellValue();
+                                switch (k){
+                                    case 1:
+                                        animal.setAname(cellValue);
+                                        break;
+                                    case 2:
+                                        animal.setBreed(cellValue);
+                                        break;
+                                    case 3:
+                                        animal.setP_addr(cellValue);
+                                        break;
+                                    case 4:
+                                        animal.setGender(cellValue);
+                                }
+                                break;
+                            default:{
+                                //处理日期数据
+                                animal.setBirth(cell.getDateCellValue());
+                            }
+                            break;
+                        }
+                    }
+                    animals.add(animal);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return animals;
     }
 }

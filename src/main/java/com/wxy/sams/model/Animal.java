@@ -29,4 +29,6 @@ public class Animal implements Serializable {
     @ApiModelProperty(value = "流浪动物生日")
     private Date birth;
 
+
+
 }
