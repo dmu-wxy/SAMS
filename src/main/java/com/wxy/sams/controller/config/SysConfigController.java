@@ -1,5 +1,6 @@
 package com.wxy.sams.controller.config;
 
+import com.wxy.sams.model.Animal;
 import com.wxy.sams.model.Menu;
 import com.wxy.sams.model.RespPageBean;
 import com.wxy.sams.service.AnimalService;
@@ -31,8 +32,10 @@ public class SysConfigController {
     }
 
     @GetMapping("/animal")
-    public RespPageBean getAnimalByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String keywords){
-        return animalService.getAnimalByPage(page,size,keywords);
+    public RespPageBean getAnimalByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size){
+        Animal animal = new Animal();
+        animal.setAname("");
+        return animalService.getAnimalByPage(page,size,animal,null);
     }
 
 }

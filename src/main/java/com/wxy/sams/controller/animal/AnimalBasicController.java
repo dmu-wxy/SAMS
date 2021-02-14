@@ -10,9 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/animal/info")
@@ -27,8 +28,9 @@ public class AnimalBasicController {
      * @return
      */
     @GetMapping("/")
-    public RespPageBean getAnimalByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String keywords){
-        return animalService.getAnimalByPage(page,size,keywords);
+    public RespPageBean getAnimalByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size,Animal animal,Date[] birthDate){
+        System.out.println(Arrays.toString(birthDate));
+        return animalService.getAnimalByPage(page,size,animal,birthDate);
     }
 
     @PostMapping("/")
@@ -61,7 +63,7 @@ public class AnimalBasicController {
      */
     @GetMapping("/export")
     public ResponseEntity<byte[]> exportData(){
-        List<Animal> animalList = (List<Animal>)animalService.getAnimalByPage(null,null,null).getData();
+        List<Animal> animalList = (List<Animal>)animalService.getAnimalByPage(null,null,null,null).getData();
         return POIUtils.animal2Excel(animalList);
     }
 

@@ -7,7 +7,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
 @ApiModel(value = "流浪动物实体类",description = "描述")
 public class Animal implements Serializable {
 
@@ -29,6 +28,63 @@ public class Animal implements Serializable {
     @ApiModelProperty(value = "流浪动物生日")
     private Date birth;
 
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "aid=" + aid +
+                ", aname='" + aname + '\'' +
+                ", breed='" + breed + '\'' +
+                ", p_addr='" + p_addr + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birth=" + birth +
+                '}';
+    }
 
+    public int getAid() {
+        return aid;
+    }
 
+    public void setAid(int aid) {
+        this.aid = aid;
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+
+    public String getBreed() {
+        return breed;
+    }
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public String getP_addr() {
+        return p_addr;
+    }
+
+    public void setP_addr(String p_addr) {
+        this.p_addr = p_addr;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
 }

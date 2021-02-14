@@ -3,6 +3,7 @@ package com.wxy.sams.mapper;
 import com.wxy.sams.model.Animal;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AnimalMapper {
@@ -28,29 +29,69 @@ public interface AnimalMapper {
     public Integer delete(int aid);
 
 
+//    @Select({
+//            "<script>",
+//            "select * from animal ",
+//            "<if test='keywords != null'>",
+//            "where aname like concat('%',#{keywords},'%')",
+//            "</if>",
+//            "order by aid ",
+//            "<if test='page != null and size != null'>",
+//            "limit #{page},#{size}",
+//            "</if>",
+//            "</script>"
+//    })
+//    List<Animal> getAnimalByPage(Integer page, Integer size,@Param("keywords") String keywords);
+
     @Select({
             "<script>",
             "select * from animal ",
-            "<if test='keywords != null'>",
-            "where aname like concat('%',#{keywords},'%')",
+            "<where>",
+            "<if test = 'animal.aname != null' >",
+            "and aname like concat('%',#{animal.aname},'%') ",
             "</if>",
+            "<if test = 'animal.gender != null' >",
+            "and gender = #{animal.gender} ",
+            "</if>",
+            "<if test = 'birthDate != null' >",
+            "and birth between #{birthDate[0]} and #{birthDate[1]} ",
+            "</if>",
+            "</where>",
             "order by aid ",
             "<if test='page != null and size != null'>",
             "limit #{page},#{size}",
             "</if>",
             "</script>"
     })
-    List<Animal> getAnimalByPage(Integer page, Integer size,@Param("keywords") String keywords);
+    List<Animal> getAnimalByPage(Integer page, Integer size,@Param("animal") Animal animal,@Param("birthDate") Date[] birthDate);
+
+//    @Select({
+//            "<script>",
+//            "select count(aid) from animal ",
+//            "<if test = 'keywords != null' >",
+//            "where aname like concat('%',#{keywords},'%')",
+//            "</if>",
+//            "</script>"
+//    })
+//    Long getTotal(@Param("keywords") String keywords);
 
     @Select({
             "<script>",
             "select count(aid) from animal ",
-            "<if test = 'keywords != null' >",
-            "where aname like concat('%',#{keywords},'%')",
+            "<where>",
+            "<if test = 'animal.aname != null' >",
+            "and aname like concat('%',#{animal.aname},'%') ",
             "</if>",
+            "<if test = 'animal.gender != null' >",
+            "and gender = #{animal.gender} ",
+            "</if>",
+            "<if test = 'birthDate != null' >",
+            "and birth between #{birthDate[0]} and #{birthDate[1]}",
+            "</if>",
+            "</where>",
             "</script>"
     })
-    Long getTotal(@Param("keywords") String keywords);
+    Long getTotal(@Param("animal") Animal animal, @Param("birthDate") Date[] birthDate);
 
     @Insert({
             "<script>",
@@ -61,4 +102,6 @@ public interface AnimalMapper {
             "</script>"
     })
     int insertAnimals(@Param("animals") List<Animal> animals);
+
+
 }
