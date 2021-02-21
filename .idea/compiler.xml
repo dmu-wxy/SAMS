@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="samsModel" />
+        <module name="samsWeb" />
+        <module name="samsMapper" />
+        <module name="samsCommons" />
+        <module name="samsService" />
+        <module name="samsMail" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sams" target="1.8" />
+      <module name="samsCommons" target="1.8" />
+      <module name="samsMail" target="1.8" />
+      <module name="samsMapper" target="1.8" />
+      <module name="samsModel" target="1.8" />
+      <module name="samsServer" target="1.8" />
+      <module name="samsService" target="1.8" />
+      <module name="samsWeb" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="samsCommons" options="-parameters" />
+      <module name="samsMail" options="-parameters" />
+      <module name="samsMapper" options="-parameters" />
+      <module name="samsModel" options="-parameters" />
+      <module name="samsService" options="-parameters" />
+      <module name="samsWeb" options="-parameters" />
+    </option>
+  </component>
+</project>

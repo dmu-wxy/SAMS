@@ -1,0 +1,7 @@
+org\meteor\sams\mapper\RoleMapper.class
+org\meteor\sams\mapper\MetaMapper.class
+org\meteor\sams\mapper\ManagerMapper.class
+org\meteor\sams\mapper\ManagerRoleMapper.class
+org\meteor\sams\mapper\AnimalMapper.class
+org\meteor\sams\mapper\MenuMapper.class
+org\meteor\sams\mapper\MenuRoleMapper.class

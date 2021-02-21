@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sams.iml" filepath="$PROJECT_DIR$/sams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsCommons/samsCommons.iml" filepath="$PROJECT_DIR$/samsServer/samsCommons/samsCommons.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsMail/samsMail.iml" filepath="$PROJECT_DIR$/samsMail/samsMail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsMapper/samsMapper.iml" filepath="$PROJECT_DIR$/samsServer/samsMapper/samsMapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsModel/samsModel.iml" filepath="$PROJECT_DIR$/samsServer/samsModel/samsModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsServer.iml" filepath="$PROJECT_DIR$/samsServer/samsServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsService/samsService.iml" filepath="$PROJECT_DIR$/samsServer/samsService/samsService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samsServer/samsWeb/samsWeb.iml" filepath="$PROJECT_DIR$/samsServer/samsWeb/samsWeb.iml" />
+    </modules>
+  </component>
+</project>

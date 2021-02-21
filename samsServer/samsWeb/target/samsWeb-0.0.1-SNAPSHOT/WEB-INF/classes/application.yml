@@ -1,0 +1,81 @@
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: false
+
+spring:
+  mvc:
+    format:
+      date: yyyy-MM-dd
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/sams?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  servlet:
+    multipart:
+      max-file-size: 1MB
+  redis:
+    host: smartdog.top
+    database: 0
+    port: 6379
+    password: meteor
+  #devtools:
+    #restart:
+      #exclude: classpath:/static/** #从不触发自动重启的目录中除去
+      #additional-paths: src/main/resources/templates #将目录加入到改变自动重启
+      #trigger-file: .trigger-file #该文件修改才会重启
+  cache:
+    cache-names: c1
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 2290502632@qq.com
+    password: mjeqregqbjmidhja
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+        debug: true
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true  # 开启shutdown端点
+    health:
+      show-details: when_authorized
+  endpoints:
+    web:
+      exposure:
+        include: '*'  # 暴露所有端点
+  info:
+    git:
+      mode: full
+
+info:
+  app:
+    java:
+      source: 11.0.9  #需要在pom中配置资源位置
+      target: 11.0.9
+  author:
+    name: meteor
+    address: www.smartdog.top
+server:
+  port: 8081

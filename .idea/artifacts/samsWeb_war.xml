@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="samsWeb:war">
+    <output-path>$PROJECT_DIR$/samsServer/samsWeb/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>samsWeb</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="samsWeb-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="samsWeb:war exploded" />
+    </root>
+  </artifact>
+</component>
