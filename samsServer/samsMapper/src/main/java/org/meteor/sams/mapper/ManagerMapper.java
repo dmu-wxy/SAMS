@@ -39,7 +39,7 @@ public interface ManagerMapper {
     })
     @Results({
             @Result(column = "mid",property = "mid"),
-            @Result(column = "mid",property = "roles",many = @Many(select = "com.wxy.sams.mapper.RoleMapper.getRolesByMid",fetchType = FetchType.EAGER))
+            @Result(column = "mid",property = "roles",many = @Many(select = "org.meteor.sams.mapper.RoleMapper.getRolesByMid",fetchType = FetchType.EAGER))
     })
     List<Manager> getAllManagers(int mid,@Param("keywords") String keywords);
 

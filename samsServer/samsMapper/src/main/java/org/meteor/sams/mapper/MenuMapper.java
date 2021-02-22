@@ -19,8 +19,8 @@ public interface MenuMapper {
             "from menu m1,menu m2,manage_role mrr,menu_role mr " +
             "where m1.id = m2.parentId and mrr.mid = #{id} and mrr.rid = mr.rid and mr.mid = m2.id and m2.enabled = true order by m1.id,m2.id;")
     @Results({
-            @Result(column = "{id = id,mid = mid}",property = "children",many = @Many(select="com.wxy.sams.mapper.MenuMapper.getMenusById",fetchType= FetchType.EAGER)),
-            @Result(column = "{id = id,mid = mid}",property = "meta",one=@One(select="com.wxy.sams.mapper.MetaMapper.getMetaById",fetchType= FetchType.EAGER))
+            @Result(column = "{id = id,mid = mid}",property = "children",many = @Many(select="org.meteor.sams.mapper.MenuMapper.getMenusById",fetchType= FetchType.EAGER)),
+            @Result(column = "{id = id,mid = mid}",property = "meta",one=@One(select="org.meteor.sams.mapper.MetaMapper.getMetaById",fetchType= FetchType.EAGER))
     })
     public List<Menu> getMenuById(Integer id);
 
@@ -35,7 +35,7 @@ public interface MenuMapper {
             "m2.*,mrr.mid " +
             "from menu m1,menu m2,manage_role mrr,menu_role mr " +
             "where m1.id = m2.parentId and m1.id = #{id} and mrr.mid = #{mid} and mrr.rid = mr.rid and mr.mid = m2.id and m2.enabled = true")
-    @Result(column = "{id = id,mid = mid}",property = "meta",one=@One(select="com.wxy.sams.mapper.MetaMapper.getMetasById",fetchType= FetchType.EAGER))
+    @Result(column = "{id = id,mid = mid}",property = "meta",one=@One(select="org.meteor.sams.mapper.MetaMapper.getMetasById",fetchType= FetchType.EAGER))
     public List<Menu> getMenusById(Integer id,Integer mid);
 
 
@@ -46,7 +46,7 @@ public interface MenuMapper {
      */
     @Select("select m.*,mr.rid as rid " +
             "from menu m,menu_role mr where m.id = mr.mid order by m.id")
-    @Result(column = "rid",property = "roles",many = @Many(select = "com.wxy.sams.mapper.RoleMapper.getRolesById",fetchType = FetchType.EAGER))
+    @Result(column = "rid",property = "roles",many = @Many(select = "org.meteor.sams.mapper.RoleMapper.getRolesById",fetchType = FetchType.EAGER))
     public List<Menu> getAllMenusWithRole();
 
 
@@ -54,14 +54,14 @@ public interface MenuMapper {
     @Select("select id,name from menu where parentId is null")
     @Results({
             @Result(column = "id",property = "id"),
-            @Result(column = "id", property = "children", many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusChildren", fetchType = FetchType.EAGER))
+            @Result(column = "id", property = "children", many = @Many(select = "org.meteor.sams.mapper.MenuMapper.getAllMenusChildren", fetchType = FetchType.EAGER))
     })
     public List<Menu> getAllMenus();
 
     @Select("select id,name from menu where parentId = #{id}")
     @Results({
             @Result(column = "id",property = "id"),
-        @Result(column = "id",property = "children",many = @Many(select = "com.wxy.sams.mapper.MenuMapper.getAllMenusGrandchild",fetchType = FetchType.EAGER))
+        @Result(column = "id",property = "children",many = @Many(select = "org.meteor.sams.mapper.MenuMapper.getAllMenusGrandchild",fetchType = FetchType.EAGER))
     })
     public List<Menu> getAllMenusChildren(Integer id);
 
