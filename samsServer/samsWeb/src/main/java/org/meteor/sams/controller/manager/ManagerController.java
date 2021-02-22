@@ -52,4 +52,12 @@ public class ManagerController {
         }
         return RespBean.error("删除失败！");
     }
+
+    @PostMapping("/insert")
+    public RespBean insertManager(Manager manager){
+        if(managerService.insertManager(manager) == 1){
+            return RespBean.ok("添加成功");
+        }
+        return RespBean.error("添加失败");
+    }
 }

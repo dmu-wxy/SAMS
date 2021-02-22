@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/mailServer/mailServer.iml" filepath="$PROJECT_DIR$/mailServer/mailServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/sams.iml" filepath="$PROJECT_DIR$/sams.iml" />
       <module fileurl="file://$PROJECT_DIR$/samsServer/samsCommons/samsCommons.iml" filepath="$PROJECT_DIR$/samsServer/samsCommons/samsCommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/samsMail/samsMail.iml" filepath="$PROJECT_DIR$/samsMail/samsMail.iml" />

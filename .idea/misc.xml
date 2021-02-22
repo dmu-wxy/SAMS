@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/samsServer/samsWeb/pom.xml" />
+        <option value="$PROJECT_DIR$/mailServer/pom.xml" />
       </list>
     </option>
   </component>

@@ -8,14 +8,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="samsModel" />
-        <module name="samsWeb" />
-        <module name="samsMapper" />
-        <module name="samsCommons" />
         <module name="samsService" />
         <module name="samsMail" />
+        <module name="samsWeb" />
+        <module name="samsMapper" />
+        <module name="mailServer" />
+        <module name="samsCommons" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="mailServer" target="1.8" />
       <module name="sams" target="1.8" />
       <module name="samsCommons" target="1.8" />
       <module name="samsMail" target="1.8" />
@@ -28,6 +30,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mailServer" options="-parameters" />
       <module name="samsCommons" options="-parameters" />
       <module name="samsMail" options="-parameters" />
       <module name="samsMapper" options="-parameters" />

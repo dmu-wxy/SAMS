@@ -26,8 +26,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="samsModel" />
-    <orderEntry type="module" module-name="samsModel" />
-    <orderEntry type="module" module-name="samsModel" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-json:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.3" level="project" />

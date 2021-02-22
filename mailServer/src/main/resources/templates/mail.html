@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎加入</title>
+</head>
+<body>
+欢迎<span th:text="${mname}"></span>加入 流浪动物管理组织 大家庭，下面是您的信息：
+<table border="1">
+    <tr>
+        <td>姓名</td>
+        <td th:text="${mname}"></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td th:text="${gender}"></td>
+    </tr>
+    <tr>
+        <td>生日</td>
+        <td th:text="${birth}"></td>
+    </tr>
+    <tr>
+        <td>电话</td>
+        <td th:text="${mphone}"></td>
+    </tr>
+    <tr>
+        <td>角色</td>
+        <td th:text="${roleName}"></td>
+    </tr>
+</table>
+如需修改信息请到【个人中心】修改。
+
+</body>
+</html>

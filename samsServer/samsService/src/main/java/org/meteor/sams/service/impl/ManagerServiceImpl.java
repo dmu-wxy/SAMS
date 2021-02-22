@@ -5,6 +5,9 @@ import org.meteor.sams.mapper.ManagerRoleMapper;
 import org.meteor.sams.model.Manager;
 import org.meteor.sams.service.ManagerService;
 import org.meteor.sams.util.ManagerUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,16 +20,16 @@ import java.util.List;
 @Service
 public class ManagerServiceImpl implements ManagerService , UserDetailsService {
 
+    private final static Logger logger = LoggerFactory.getLogger(ManagerServiceImpl.class);
+
     @Autowired
     private ManagerMapper managerMapper;
 
     @Autowired
     private ManagerRoleMapper managerRoleMapper;
 
-    @Override
-    public void update(Manager manager) {
-        managerMapper.update(manager);
-    }
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Override
     public Integer delete(int mid) {
@@ -37,6 +40,17 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
     @Override
     public Manager findById(String mid) {
         return managerMapper.findById(mid);
+    }
+
+    @Override
+    public Integer insertManager(Manager manager) {
+        int result = 1;
+        if(result == 1){
+            //添加成功后发送邮件
+            logger.info("服务端>>>>" + manager.toString());
+            rabbitTemplate.convertAndSend("sams.mail.welcome",manager);
+        }
+        return result;
     }
 
 

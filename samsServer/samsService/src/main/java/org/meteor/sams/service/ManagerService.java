@@ -6,12 +6,12 @@ import java.util.List;
 
 public interface ManagerService {
 
-    public void update(Manager manager);
 
     public Integer delete(int mid);
 
     public Manager findById(String mid);
 
+    public Integer insertManager(Manager manager);
 
     public List<Manager> getAllManagers(String keywords);
 
