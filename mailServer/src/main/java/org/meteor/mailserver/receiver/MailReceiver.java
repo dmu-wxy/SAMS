@@ -45,23 +45,25 @@ public class MailReceiver {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
         try {
-            helper.setFrom(mailProperties.getPassword());
+            helper.setFrom(mailProperties.getUsername());
             helper.setSubject("欢迎邮件");
             helper.setSentDate(new Date());
             Context context = new Context();
-            context.setVariable("mname",manager.getMname());
-            context.setVariable("gender",manager.getGender());
-            context.setVariable("birth",manager.getBirth());
-            context.setVariable("mphone",manager.getMphone());
+            context.setVariable("mname",manager.getMname() != null ? manager.getMname() : "");
+            context.setVariable("gender",manager.getGender() == 0 ? "男" : "女");
+            context.setVariable("birth",manager.getBirth() != null ? manager.getBirth() : "");
+            context.setVariable("mphone",manager.getMphone() != null ? manager.getMphone() : "");
             String role = "";
-            for(Role temp: manager.getRoles()){
-                role += temp.getNameZh() + "/";
+            if(manager.getRoles() != null) {
+                for (Role temp : manager.getRoles()) {
+                    role += temp.getNameZh() + "/";
+                }
             }
             context.setVariable("roleName",role);
             String mail = templateEngine.process("mail", context);
             helper.setText(mail,true);
-            javaMailSender.send(mimeMessage);
             helper.setTo(to);
+            javaMailSender.send(mimeMessage);
         } catch (MessagingException e) {
             logger.error("邮件发送失败：" + e.getMessage());
         }
