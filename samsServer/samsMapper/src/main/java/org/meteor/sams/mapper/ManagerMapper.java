@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ManagerMapper {
 
-
     @Update("update manager set mname = #{mname}," +
             "mphone = #{mphone}," +
             "memail = #{memail}," +
@@ -45,4 +44,7 @@ public interface ManagerMapper {
 
     @Select("select * from manager where mname = #{userName}")
     Manager findByName(String userName);
+
+    @Select("select * from manager where mid != #{mid}")
+    List<Manager> getAllManagersExceptCurrentManager(Integer mid);
 }

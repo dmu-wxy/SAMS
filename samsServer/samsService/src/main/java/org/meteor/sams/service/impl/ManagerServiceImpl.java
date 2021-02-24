@@ -75,6 +75,11 @@ public class ManagerServiceImpl implements ManagerService , UserDetailsService {
         return managerRoleMapper.addRole(mid,rids) == rids.length;
     }
 
+    @Override
+    public List<Manager> getAllManagersExceptCurrentManager() {
+        return managerMapper.getAllManagersExceptCurrentManager(ManagerUtils.getCurrentManager().getMid());
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

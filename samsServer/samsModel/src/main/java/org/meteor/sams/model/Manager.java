@@ -19,6 +19,8 @@ public class Manager implements Serializable, UserDetails {
 
     private String mname;
 
+    private String face;
+
     private String mphone;
 
     private String password;

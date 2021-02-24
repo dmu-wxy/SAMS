@@ -1,3 +1,4 @@
+org\meteor\sams\mapper\MoneyMapper.class
 org\meteor\sams\mapper\RoleMapper.class
 org\meteor\sams\mapper\MetaMapper.class
 org\meteor\sams\mapper\ManagerMapper.class

@@ -18,4 +18,7 @@ public interface ManagerService {
     int updateManager(Manager manager);
 
     boolean updateManagerRole(Integer mid, Integer[] rids);
+
+    List<Manager> getAllManagersExceptCurrentManager();
+
 }

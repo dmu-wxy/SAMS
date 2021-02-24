@@ -1,4 +1,3 @@
-org\meteor\sams\model\Msg.class
 org\meteor\sams\model\School.class
 org\meteor\sams\model\Menu.class
 org\meteor\sams\model\Role.class
@@ -6,7 +5,9 @@ org\meteor\sams\model\MailSendLog.class
 org\meteor\sams\model\MenuRole.class
 org\meteor\sams\model\Meta.class
 org\meteor\sams\model\RespBean.class
+org\meteor\sams\model\Money.class
 org\meteor\sams\model\ManageRole.class
 org\meteor\sams\model\Manager.class
 org\meteor\sams\model\Animal.class
+org\meteor\sams\model\Msg.class
 org\meteor\sams\model\RespPageBean.class
