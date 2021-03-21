@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="samsWeb-0.0.1-SNAPSHOT.war">
+    <root id="archive" name="sams.war">
       <element id="artifact" artifact-name="samsWeb:war exploded" />
     </root>
   </artifact>

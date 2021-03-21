@@ -50,19 +50,19 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
         debug: true
 
-management:
-  endpoint:
-    shutdown:
-      enabled: true  # 开启shutdown端点
-    health:
-      show-details: when_authorized
-  endpoints:
-    web:
-      exposure:
-        include: '*'  # 暴露所有端点
-  info:
-    git:
-      mode: full
+#management:
+#  endpoint:
+#    shutdown:
+#      enabled: true  # 开启shutdown端点
+#    health:
+#      show-details: when_authorized
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'  # 暴露所有端点
+#  info:
+#    git:
+#      mode: full
 
 server:
   port: 8081

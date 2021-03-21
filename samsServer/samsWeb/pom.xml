@@ -13,6 +13,7 @@
     <artifactId>samsWeb</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>samsWeb</name>
+    <packaging>war</packaging>
     <description>sams start project</description>
 
     <properties>
@@ -33,11 +34,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-amqp</artifactId>-->
-<!--            <version>2.1.7.RELEASE</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -80,16 +76,17 @@
             <version>1.2.16</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-tomcat</artifactId>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
 
     </dependencies>
 
     <build>
+        <finalName>sams</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
