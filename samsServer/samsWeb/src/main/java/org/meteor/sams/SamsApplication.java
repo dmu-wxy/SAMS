@@ -12,14 +12,14 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @MapperScan("org.meteor.sams.mapper")
 @EnableCaching
 @EnableScheduling
-public class SamsApplication extends SpringBootServletInitializer {
-
+//public class SamsApplication extends SpringBootServletInitializer {
+public class SamsApplication {
     public static void main(String[] args) {
         SpringApplication.run(SamsApplication.class, args);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(SamsApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//        return builder.sources(SamsApplication.class);
+//    }
 }
