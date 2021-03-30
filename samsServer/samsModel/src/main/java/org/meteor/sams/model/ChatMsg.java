@@ -7,6 +7,15 @@ public class ChatMsg {
     private String to;
     private String content;
     private Date date;
+    private String fromNickName;
+
+    public String getFromNickName() {
+        return fromNickName;
+    }
+
+    public void setFromNickName(String fromNickName) {
+        this.fromNickName = fromNickName;
+    }
 
     public String getFrom() {
         return from;
