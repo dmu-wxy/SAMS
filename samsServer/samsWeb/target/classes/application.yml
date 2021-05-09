@@ -31,7 +31,7 @@ spring:
     multipart:
       max-file-size: 1MB
   redis:
-    host: smartdog.top
+    host: localhost
     database: 0
     port: 6379
     password: meteor

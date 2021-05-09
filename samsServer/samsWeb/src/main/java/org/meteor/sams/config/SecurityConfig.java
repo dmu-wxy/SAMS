@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 
 @Configuration
@@ -50,6 +51,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    VerifyCodeAuthenticationProvider verifyCodeAuthenticationProvider(){
+        VerifyCodeAuthenticationProvider provider = new VerifyCodeAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(managerServiceImpl);
+        return provider;
+    }
+
+    @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception{
+        ProviderManager manager = new ProviderManager(Arrays.asList(verifyCodeAuthenticationProvider()));
+        return manager;
+    }
+
+
+
     @Autowired
     protected void confiure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(managerServiceImpl);
@@ -58,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+//                .antMatchers("/verifyCode").permitAll()
 //                .anyRequest().authenticated()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
@@ -103,6 +122,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             error.setMsg("账户被禁用，请联系系统管理员！");
                         }else if(e instanceof BadCredentialsException){
                             error.setMsg("账户或密码错误");
+                        }else if(e instanceof AuthenticationServiceException){
+                            error.setMsg("验证码错误");
                         }
                         writer.write(new ObjectMapper().writeValueAsString(error));
                         writer.flush();
@@ -144,6 +165,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login").antMatchers("/system/config/animal/");
+        web.ignoring().antMatchers("/system/config/animal/")
+                        .antMatchers("/login")
+                        .antMatchers("/verifyCode");
     }
 }
