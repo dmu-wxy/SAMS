@@ -145,6 +145,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
                 .and()
+                .rememberMe()
+                .key("sams")
+                .rememberMeParameter("remeberMe")
+                .and()
                 .csrf().disable().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
                     //没有认证时，在这里处理结果
             @Override
